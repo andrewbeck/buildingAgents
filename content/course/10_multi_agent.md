@@ -1,10 +1,10 @@
-# 09 — Multi-Agent and Long-Running Agents
+# 10 — Multi-Agent and Long-Running Agents
 
 > When more than one loop is worth its cost, how to structure the coordination, and what a harness needs when a single task runs for hours. Built on Anthropic's research-system post, Cognition's counterargument, and one measured Project 9 build. After this chapter you can refuse a multi-agent design for the right reasons and build one for the right reasons.
 
 ## Build
 
-- [Project 9](./11_projects.md#project-9--multi-agent-research): lead plus parallel sub-agents with a cost governor, built only after Projects 5 and 7 work. The acceptance criterion is a measured token ratio against Project 5 on the same question, and an interesting failure on a tightly coupled task. Extend the Project 6 suite with a blinded cost-per-win comparison.
+- [Project 9](./12_projects.md#project-9--multi-agent-research): lead plus parallel sub-agents with a cost governor, built only after Projects 5 and 7 work. The acceptance criterion is a measured token ratio against Project 5 on the same question, and an interesting failure on a tightly coupled task. Extend the Project 6 suite with a blinded cost-per-win comparison.
 
 ## Read
 
@@ -14,7 +14,7 @@ Read first:
 - **[Don't Build Multi-Agents](https://cognition.ai/blog/dont-build-multi-agents)** (Cognition, 2025). Immediately after. Parallelize read-only work, serialize writes.
 - **[Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)** (Anthropic, 2025). The harness, not the model, owns durability.
 
-Read after: **[Benchmarking Multi-Agent Architectures](https://blog.langchain.com/benchmarking-multi-agent-architectures/)** (LangChain) for numbers, **[Open Deep Research](https://blog.langchain.com/open-deep-research/)** to compare against your own build, and **[Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)**. All in the [multi-agent and long-running tier](./13_reading_list.md#tier-multi-agent-and-long-running).
+Read after: **[Benchmarking Multi-Agent Architectures](https://blog.langchain.com/benchmarking-multi-agent-architectures/)** (LangChain) for numbers, **[Open Deep Research](https://blog.langchain.com/open-deep-research/)** to compare against your own build, and **[Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)**. All in the [multi-agent and long-running tier](./14_reading_list.md#tier-multi-agent-and-long-running).
 
 ## The default is one agent
 
@@ -75,7 +75,7 @@ From the research-system post:
 
 ## Evaluating multi-agent systems
 
-Harder than single-agent because the paths vary. Evaluate end state, not turn by turn, especially when agents mutate state. Start with about twenty queries and a judge that scores factual accuracy, citation accuracy, completeness, source quality, and tool efficiency. Human review still catches what the judge misses: Anthropic's judge did not notice agents preferring SEO content farms over academic PDFs; humans did. Track **cost per win**, not pass rate. [Chapter 06](./06_evals.md).
+Harder than single-agent because the paths vary. Evaluate end state, not turn by turn, especially when agents mutate state. Start with about twenty queries and a judge that scores factual accuracy, citation accuracy, completeness, source quality, and tool efficiency. Human review still catches what the judge misses: Anthropic's judge did not notice agents preferring SEO content farms over academic PDFs; humans did. Track **cost per win**, not pass rate. [Chapter 07](./07_evals.md).
 
 Emergent behavior is real: a tweak to the lead prompt changes sub-agent behavior unexpectedly. Test interaction patterns, not agents in isolation.
 
@@ -87,13 +87,13 @@ A task that runs for hours is a different engineering problem from a task that r
 2. **Harness assumptions go stale.** A harness encodes beliefs about model limits (needs a context refresh here, cannot plan past N steps). The next model invalidates them. Anthropic's answer is to decouple: the **session** (append-only event log), the **harness** (the loop that calls the model and routes tool calls), and the **sandbox** (where code runs and files live) are separate components that can be swapped independently. Brain, hands, log.
 3. **Remove scaffolding as models improve.** The harness-design post is a diary of deleting things: context refreshes went away when context anxiety went away; the sprint negotiation between generator and evaluator went away later. Planner and evaluator survived. Keep the parts that add judgment, delete the parts that compensate for a limit the model no longer has.
 
-The event-log / active-context split from [Chapter 07](./07_context_and_memory.md) is the concrete architecture. Add to it: a task budget the model can see (so it paces itself instead of being cut off), server-side compaction, structured notes to disk, a stop-reason vocabulary (`done | needs_human | blocked | failed_safely | budget_reached`), and a way to resume from the log after a restart.
+The event-log / active-context split from [Chapter 08](./08_context_and_memory.md) is the concrete architecture. Add to it: a task budget the model can see (so it paces itself instead of being cut off), server-side compaction, structured notes to disk, a stop-reason vocabulary (`done | needs_human | blocked | failed_safely | budget_reached`), and a way to resume from the log after a restart.
 
 > **Snapshot 2026-09.** Measured autonomy horizons roughly doubled this year ([METR's fifty-percent time horizon](https://metr.org/time-horizons/) for frontier models is now measured in many hours and their task suite tops out). Current Claude models ship with 1M context, 128K output, a memory tool, compaction, and task budgets specifically for this. Managed Agents adds session budgets in dollars, scheduled deployments, and webhooks on session events. The practical implication: fewer tasks need multi-agent to work around context limits, and more need a harness that can run a single agent for a long time safely.
 
 ## When to reach for Managed Agents instead
 
-If the reason you want multi-agent is context isolation or parallel breadth, and the reason you want a harness is hours-long durability, a managed runtime gives you both without operating the loop. You describe the agent (prompt, tools, MCP servers, skills), the vendor runs sessions with a container and a durable log, and you consume an event stream. Project 8 in [Chapter 11](./11_projects.md) is the build. The tradeoff is control and lock-in; the win is not writing the harness.
+If the reason you want multi-agent is context isolation or parallel breadth, and the reason you want a harness is hours-long durability, a managed runtime gives you both without operating the loop. You describe the agent (prompt, tools, MCP servers, skills), the vendor runs sessions with a container and a durable log, and you consume an event stream. Project 8 in [Chapter 12](./12_projects.md) is the build. The tradeoff is control and lock-in; the win is not writing the harness.
 
 ## Exercises
 

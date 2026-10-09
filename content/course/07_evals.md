@@ -1,10 +1,10 @@
-# 06 — Evals
+# 07 — Evals
 
 > The eval discipline for agents: how to find what is actually breaking, turn it into a test set and a grader you trust, and measure so a prompt or model change is a decision instead of a gamble. After it you can run an error-analysis pass on 30 traces, build a 50-case eval set with a calibrated LLM judge, and say whether a change made your Project 9 agent better, worse, or just different.
 
 ## Build
 
-- [Project 6](./11_projects.md#project-6--eval-suite-and-review-workbench), part A: the eval suite for Project 5. Twenty hand-written cases, generated inputs for the rest, three layers of graders, and a judge aligned to your labels. Build it now, before Project 7; the course puts evals in the middle on purpose.
+- [Project 6](./12_projects.md#project-6--eval-suite-and-review-workbench), part A: the eval suite for Project 5. Twenty hand-written cases, generated inputs for the rest, three layers of graders, and a judge aligned to your labels. Build it now, before Project 7; the course puts evals in the middle on purpose.
 - Part B, the review workbench, can wait until you have enough traces to need it, which is usually Project 9.
 
 ## Read
@@ -15,7 +15,7 @@ Read first:
 - **[LLM Evals FAQ](https://hamel.dev/blog/posts/evals-faq/)** (Husain and Shankar, 2025). How many examples, binary versus Likert, who arbitrates.
 - **[Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)** (Anthropic, 2026). Agent evals are trajectory evals.
 
-Read after: **[LLM-as-a-Judge](https://hamel.dev/blog/posts/llm-judge/)** and **[Field Guide to Rapidly Improving AI Products](https://hamel.dev/blog/posts/field-guide/)** (Husain) before adding a judge; Eugene Yan's three pieces when your judge disagrees with you. All in the [evals tier](./13_reading_list.md#tier-evals).
+Read after: **[LLM-as-a-Judge](https://hamel.dev/blog/posts/llm-judge/)** and **[Field Guide to Rapidly Improving AI Products](https://hamel.dev/blog/posts/field-guide/)** (Husain) before adding a judge; Eugene Yan's three pieces when your judge disagrees with you. All in the [evals tier](./14_reading_list.md#tier-evals).
 
 ## Why evals are the whole job
 
@@ -273,11 +273,11 @@ Anthropic's multi-agent research system, the one Project 9 is modeled on, shippe
 
 One model, one prompt, most aligned with humans of everything they tried. The bias humans caught that the judge missed: early agents preferred SEO content farms over academic PDFs. The judge graded factual accuracy correctly; only a human noticed the drift in *where* facts came from. That became the source-quality axis. Judges find errors. Humans find kinds of errors the judge was never told to look for.
 
-[Anthropic's tool-evaluation cookbook](https://platform.claude.com/cookbook/tool-evaluation-tool-evaluation) flips the frame: have the agent grade your tools by emitting a `<feedback>` block on what was confusing, then have a coding agent rewrite the tool descriptions from the stack of feedback, checked against held-out tasks. See [Tools and MCP](./05_tools_and_mcp.md).
+[Anthropic's tool-evaluation cookbook](https://platform.claude.com/cookbook/tool-evaluation-tool-evaluation) flips the frame: have the agent grade your tools by emitting a `<feedback>` block on what was confusing, then have a coding agent rewrite the tool descriptions from the stack of feedback, checked against held-out tasks. See [Tools and MCP](./06_tools_and_mcp.md).
 
 ### Cost per win
 
-For scoring a multi-agent system against the single agent (Project 9's stretch goal), the critical column in the results table is **cost per win**. Multi-agent should win on breadth-first questions and lose on single-answer factual questions, at a token cost in the neighborhood of the roughly 4× the author measured in [Chapter 09](./09_multi_agent.md). If the wins do not justify the cost, the system is over-engineered for the question.
+For scoring a multi-agent system against the single agent (Project 9's stretch goal), the critical column in the results table is **cost per win**. Multi-agent should win on breadth-first questions and lose on single-answer factual questions, at a token cost in the neighborhood of the roughly 4× the author measured in [Chapter 10](./10_multi_agent.md). If the wins do not justify the cost, the system is over-engineered for the question.
 
 A workable dataset shape: 10 questions, 3 breadth-first, 3 comparison, 2 single-answer factual (where multi-agent should *not* help), 2 deep single-source, each with a hand-written rubric. Blind the judge with A/B labels. Hand-grade 3 of the 10 pairs first and iterate the judge prompt until you disagree on at most one. Score each criterion pass/fail with a one-line rationale rather than 1 to 5; rubric bullets are binary questions in disguise.
 
@@ -295,7 +295,7 @@ You cannot store every trace forever. The pattern that works:
 
 Run your offline evals on the sampled traces post-hoc. That is what catches model updates, distribution shift, and inputs a static set never had.
 
-For a trace to become an eval case later it needs, per the [Production](./08_production.md) logging spec: run ID, input, prompt version, model ID, per-step tokens and stop reason, every tool call with args and result, final output, cost, and an outcome label. Skip tool results and you cannot measure hallucination. Skip the prompt version and you cannot tie a regression to its cause.
+For a trace to become an eval case later it needs, per the [Production](./09_production.md) logging spec: run ID, input, prompt version, model ID, per-step tokens and stop reason, every tool call with args and result, final output, cost, and an outcome label. Skip tool results and you cannot measure hallucination. Skip the prompt version and you cannot tie a regression to its cause.
 
 ### A/B testing
 

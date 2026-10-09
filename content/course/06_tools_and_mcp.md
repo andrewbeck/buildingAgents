@@ -1,4 +1,4 @@
-# 05 — Writing Good Tools, and MCP
+# 06 — Writing Good Tools, and MCP
 
 > Tool design is the highest-leverage engineering in an agent. This chapter covers how to design a tool surface, how to gate it, how to evaluate it, and how MCP standardizes the boundary. After it you can take a napkin list of "things the agent needs to do" and turn it into a small, safe, well-described tool set, and you can decide when a tool should be an MCP server.
 
@@ -6,8 +6,8 @@ Anthropic's phrase for this is the **agent-computer interface (ACI)**. The frami
 
 ## Build
 
-- [Project 5](./11_projects.md#project-5--research-agent): a research agent with citations and budgets. The first project where tool descriptions, gating, and per-tool budgets decide whether it works. Write the analyst's operation list from this chapter before writing a tool.
-- Also write three tool-eval cases for Project 5's search tool; they seed the suite in Project 6. The MCP server, [Project 10](./11_projects.md#project-10--a-custom-mcp-server), waits until Chapter 10.
+- [Project 5](./12_projects.md#project-5--research-agent): a research agent with citations and budgets. The first project where tool descriptions, gating, and per-tool budgets decide whether it works. Write the analyst's operation list from this chapter before writing a tool.
+- Also write three tool-eval cases for Project 5's search tool; they seed the suite in Project 6. The MCP server, [Project 10](./12_projects.md#project-10--a-custom-mcp-server), waits until Chapter 11.
 
 ## Read
 
@@ -17,7 +17,7 @@ Read first:
 - **[Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)** (Claude docs), the strict-schema and parallel-call sections.
 - **[Introducing the Model Context Protocol](https://www.anthropic.com/news/model-context-protocol)** (Anthropic, 2024). Ten minutes; the N-by-M argument.
 
-Read after: the **[MCP specification](https://modelcontextprotocol.io/specification/2025-11-25)** before building or trusting any server, and **[Code Mode](https://blog.cloudflare.com/code-mode/)** (Cloudflare). See the [the loop and tools tier](./13_reading_list.md#tier-the-loop-and-tools) and the [platforms and MCP tier](./13_reading_list.md#tier-platforms-and-mcp).
+Read after: the **[MCP specification](https://modelcontextprotocol.io/specification/2025-11-25)** before building or trusting any server, and **[Code Mode](https://blog.cloudflare.com/code-mode/)** (Cloudflare). See the [the loop and tools tier](./14_reading_list.md#tier-the-loop-and-tools) and the [platforms and MCP tier](./14_reading_list.md#tier-platforms-and-mcp).
 
 ## Think like an analyst
 
@@ -39,7 +39,7 @@ From *Writing tools for agents* and *Building Effective Agents*:
 8. **Poka-yoke.** Design the tool so the wrong call is hard to make: enums, required fields, `strict: true`, filename-only paths.
 9. **Test how the model actually uses the tool.** Build a prototype, write evals, watch transcripts, iterate. Then in production, capture failures and feed them back.
 
-> **Author's note:** "should be thinking of how to identify edge cases as they happen and automatically enhancing agent instructions (skills, or similar?)… should probably be using the LLMs themselves to generate instructions, i.e. how we built a skill." That is exactly the loop Anthropic describes: an LLM reviews transcripts, proposes tool-description or skill edits, a human approves. Recursive improvement is the goal; [Chapter 06](./06_evals.md) is the machinery.
+> **Author's note:** "should be thinking of how to identify edge cases as they happen and automatically enhancing agent instructions (skills, or similar?)… should probably be using the LLMs themselves to generate instructions, i.e. how we built a skill." That is exactly the loop Anthropic describes: an LLM reviews transcripts, proposes tool-description or skill edits, a human approves. Recursive improvement is the goal; [Chapter 07](./07_evals.md) is the machinery.
 
 ## The pre-tool checklist
 
@@ -58,7 +58,7 @@ Number one is the discipline that keeps tool counts down. An agent with thirty t
 
 ## Blast radius and gating
 
-For every tool, document: read or write, internal or external, maximum data reachable, maximum money or damage, safe to retry, approval required. Then apply the consequence matrix from [Chapter 02](./02_when_to_build.md).
+For every tool, document: read or write, internal or external, maximum data reachable, maximum money or damage, safe to retry, approval required. Then apply the consequence matrix from [Chapter 03](./03_when_to_build.md).
 
 Bad tool surface:
 
@@ -91,7 +91,7 @@ From Anthropic's agent-design guidance: a bash tool gives the model broad levera
 - Return errors as tool results with `is_error: true`. The model recovers well when it can see what happened.
 - Execute independent tool calls concurrently and return all results in one user message.
 - Keep results small and semantic. Post-process tool output before it hits the context; the raw API response is rarely what the model needs.
-- Tool results are **untrusted data**. Web pages, documents, emails, MCP server responses can all carry injected instructions. Say so in the system prompt, then enforce it with permissions and validation, because a prompt is not a security boundary. [Chapter 08](./08_production.md).
+- Tool results are **untrusted data**. Web pages, documents, emails, MCP server responses can all carry injected instructions. Say so in the system prompt, then enforce it with permissions and validation, because a prompt is not a security boundary. [Chapter 09](./09_production.md).
 
 ## Beyond client tools
 
@@ -113,7 +113,7 @@ Two features that change tool-surface design:
 
 ## Evaluating tools
 
-Tool evals are their own layer under agent evals ([Anthropic's tool-evaluation cookbook](https://platform.claude.com/cookbook/tool-evaluation-tool-evaluation) is the worked example). For each tool, cases that check: called when it should be, not called when it should not, correct arguments, correct handling of an error result, and the number of unnecessary calls. The Project 5 failure described in [Chapter 11](./11_projects.md) (five search calls re-querying variations before a single fetch) is a tool-selection eval waiting to be written. The fix, budgeting fetches *and* total calls separately, is a description change, which is where most tool fixes live. Anthropic's cookbook has a tool-evaluation notebook worth running once.
+Tool evals are their own layer under agent evals ([Anthropic's tool-evaluation cookbook](https://platform.claude.com/cookbook/tool-evaluation-tool-evaluation) is the worked example). For each tool, cases that check: called when it should be, not called when it should not, correct arguments, correct handling of an error result, and the number of unnecessary calls. The Project 5 failure described in [Chapter 12](./12_projects.md) (five search calls re-querying variations before a single fetch) is a tool-selection eval waiting to be written. The fix, budgeting fetches *and* total calls separately, is a description change, which is where most tool fixes live. Anthropic's cookbook has a tool-evaluation notebook worth running once.
 
 ## MCP
 

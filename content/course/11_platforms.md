@@ -1,12 +1,12 @@
-# 10 — Frameworks and Platforms
+# 11 — Frameworks and Platforms
 
 > Frameworks exist to help you with one piece of the stack, some pieces, or all of it. This chapter is the map: what each one takes off your plate, what it hides, and how to choose. It is the most perishable chapter in the course, so every version-specific claim is in a snapshot callout. After it you can pick a stack for a new project in ten minutes and justify it in one sentence.
 
-Read every framework against the twelve things a framework can add (from [Chapter 03](./03_the_loop.md)): streaming, concurrency, hooks, state persistence, tracing, memory abstractions, sub-agents, skills or tool-on-demand, retries, type safety, multi-provider routing, built-in tools. Most projects need two or three. Choosing the framework that gives you those without the other nine is the actual decision.
+Read every framework against the twelve things a framework can add (from [Chapter 04](./04_the_loop.md)): streaming, concurrency, hooks, state persistence, tracing, memory abstractions, sub-agents, skills or tool-on-demand, retries, type safety, multi-provider routing, built-in tools. Most projects need two or three. Choosing the framework that gives you those without the other nine is the actual decision.
 
 ## Build
 
-- [Project 10](./11_projects.md#project-10--a-custom-mcp-server): a custom MCP server for a small domain, used from three clients. Building *for* agents is the last rung, and the tool-design rules from Chapter 05 are the spec.
+- [Project 10](./12_projects.md#project-10--a-custom-mcp-server): a custom MCP server for a small domain, used from three clients. Building *for* agents is the last rung, and the tool-design rules from Chapter 06 are the spec.
 - Also write the one sentence justifying the stack you chose for Project 8, now that you have built on both sides of the harness/deployment split.
 
 ## Read
@@ -17,7 +17,7 @@ Read first:
 - **[Scaling Managed Agents: Decoupling the brain from the hands](https://www.anthropic.com/engineering/managed-agents)** (Anthropic, 2026). Session, harness, sandbox, and why harness assumptions go stale.
 - **[How to think about agent frameworks](https://blog.langchain.com/how-to-think-about-agent-frameworks/)** (Harrison Chase, 2025). What a framework provides versus what is just abstraction.
 
-Read after: the **[MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector)** and [registry](https://github.com/modelcontextprotocol/registry) while building the server, and the LangGraph, Vercel AI SDK, and Cloudflare Agents docs as you need them. All in the [platforms and MCP tier](./13_reading_list.md#tier-platforms-and-mcp).
+Read after: the **[MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector)** and [registry](https://github.com/modelcontextprotocol/registry) while building the server, and the LangGraph, Vercel AI SDK, and Cloudflare Agents docs as you need them. All in the [platforms and MCP tier](./14_reading_list.md#tier-platforms-and-mcp).
 
 ## The two questions
 
@@ -86,17 +86,17 @@ When you adopt a framework you are accepting its answer on each of these. Know w
 
 ## No-code and app builders
 
-**Workflow tools** (n8n, Zapier, Make, and the AI-first ones) are the right answer for Category 1 problems: a stable flowchart with LLM nodes, triggers, retries, approvals, auditability. The advice stands: build the same workflow in two competitors' free tiers and judge for yourself, because every comparison blog is written by a vendor. Warning signs you have outgrown one are in [Chapter 02](./02_when_to_build.md).
+**Workflow tools** (n8n, Zapier, Make, and the AI-first ones) are the right answer for Category 1 problems: a stable flowchart with LLM nodes, triggers, retries, approvals, auditability. The advice stands: build the same workflow in two competitors' free tiers and judge for yourself, because every comparison blog is written by a vendor. Warning signs you have outgrown one are in [Chapter 03](./03_when_to_build.md).
 
 **App builders** (Bolt, Lovable, v0, Replit) build apps, not agents. They are how a non-engineer gets a UI around an agent, and increasingly how one generates an agent scaffold. Replit's generated agents run on Mastra, which is a reasonable reference for "what a generated agent looks like."
 
 ## Observability and eval tooling
 
-Pick one and instrument on day one. LangSmith if you are on LangGraph. Langfuse if you want open source and self-hosting. Braintrust or Arize Phoenix if evals are the center of gravity. All ingest OpenTelemetry. Details and the September 2026 state in [Chapter 06](./06_evals.md).
+Pick one and instrument on day one. LangSmith if you are on LangGraph. Langfuse if you want open source and self-hosting. Braintrust or Arize Phoenix if evals are the center of gravity. All ingest OpenTelemetry. Details and the September 2026 state in [Chapter 07](./07_evals.md).
 
 ## Sandboxes and browsers
 
-For your own harness: E2B, Modal, Daytona, Vercel Sandbox, Cloudflare Sandboxes. For browsers: Playwright and its MCP server for deterministic automation; Stagehand or Browser Use for language-directed automation; Cloudflare Browser Run and the newer agent-first browsers for hosted. Anthropic's computer-use and browser toolsets are GA on the API. The narrow-zone rule from [Chapter 02](./02_when_to_build.md) applies regardless of vendor.
+For your own harness: E2B, Modal, Daytona, Vercel Sandbox, Cloudflare Sandboxes. For browsers: Playwright and its MCP server for deterministic automation; Stagehand or Browser Use for language-directed automation; Cloudflare Browser Run and the newer agent-first browsers for hosted. Anthropic's computer-use and browser toolsets are GA on the API. The narrow-zone rule from [Chapter 03](./03_when_to_build.md) applies regardless of vendor.
 
 ## A decision matrix
 

@@ -1,10 +1,10 @@
-# 07 — Context Engineering and Memory
+# 08 — Context Engineering and Memory
 
-> What goes in the window, what stays out, and how the agent remembers across sessions. It leans on the Project 7 build from [Chapter 11](./11_projects.md), which is where these ideas become files and tools. After it you can diagnose "why is my agent being stupid" by asking "what is actually in its context right now," and you can name which of the four memory types you are building before you build it.
+> What goes in the window, what stays out, and how the agent remembers across sessions. It leans on the Project 7 build from [Chapter 12](./12_projects.md), which is where these ideas become files and tools. After it you can diagnose "why is my agent being stupid" by asking "what is actually in its context right now," and you can name which of the four memory types you are building before you build it.
 
 ## Build
 
-- [Project 7](./11_projects.md#project-7--memory-agentsmd-skills): memory, `agents.md`, and skills on top of Project 5. The four operations and the four memory types become files and tools. Run Project 6's suite before and after; the acceptance criterion is a measured improvement, not a feeling.
+- [Project 7](./12_projects.md#project-7--memory-agentsmd-skills): memory, `agents.md`, and skills on top of Project 5. The four operations and the four memory types become files and tools. Run Project 6's suite before and after; the acceptance criterion is a measured improvement, not a feeling.
 
 ## Read
 
@@ -14,7 +14,7 @@ Read first:
 - **[Context Engineering for Agents](https://rlancemartin.github.io/2025/06/23/context_engineering/)** (Lance Martin, 2025). Write, select, compress, isolate; the spec for Project 7 is these four buckets.
 - **[Agent Skills overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)** and **[Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)** (Claude docs). Progressive disclosure in three levels.
 
-Read after: the [Manus lessons](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus) when the agent runs past fifty turns, **[LangMem conceptual guide](https://langchain-ai.github.io/langmem/concepts/conceptual_guide/)** for the four memory types, and **[Writing a good CLAUDE.md](https://www.humanlayer.dev/blog/writing-a-good-claude-md)**. All in the [context and memory tier](./13_reading_list.md#tier-context-and-memory), which also carries the author's notes from this project.
+Read after: the [Manus lessons](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus) when the agent runs past fifty turns, **[LangMem conceptual guide](https://langchain-ai.github.io/langmem/concepts/conceptual_guide/)** for the four memory types, and **[Writing a good CLAUDE.md](https://www.humanlayer.dev/blog/writing-a-good-claude-md)**. All in the [context and memory tier](./14_reading_list.md#tier-context-and-memory), which also carries the author's notes from this project.
 
 ## Context is a finite, degrading resource
 
@@ -94,7 +94,7 @@ Durability lives in the log. Attention lives in the active context. The harness 
 
 - **Compaction.** Summarize the window and restart with the summary. Now available server-side on the Claude API (beta `compact-2026-01-12`); the critical rule is to append `response.content` back every turn so compaction blocks survive. Hierarchical compaction (summaries of summaries) for very long runs.
 - **Structured note-taking.** The agent writes notes to disk outside the window and reads them back. Anthropic's research lead saves its plan to memory before spawning sub-agents because its own context will be truncated. Project 9 persists plans to `plans/` for the same reason.
-- **Sub-agents.** Fresh windows for sub-tasks; only a compressed result returns. [Chapter 09](./09_multi_agent.md).
+- **Sub-agents.** Fresh windows for sub-tasks; only a compressed result returns. [Chapter 10](./10_multi_agent.md).
 
 [Anthropic's harness-design post](https://www.anthropic.com/engineering/harness-design-long-running-apps) describes the arc: context anxiety was real on earlier models and needed fresh sessions; later models tolerated long contexts and the workaround was removed. Check whether a context refresh is still necessary task by task rather than assuming it.
 

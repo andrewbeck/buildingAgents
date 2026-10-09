@@ -1,4 +1,4 @@
-# 12 — What Changed, April to September 2026
+# 13 — What Changed, April to September 2026
 
 > The original passes were written in April and May 2026. This chapter is the delta: what moved, what it means for each chapter, and what still needs re-verifying. Every item here is a snapshot; re-run this exercise quarterly.
 
@@ -8,7 +8,7 @@ Sources are primary (vendor docs, release notes, GitHub releases, official blogs
 
 **Claude.** Four releases in five months: Opus 4.7 (April 16, new tokenizer), Opus 4.8 (May 28), Fable 5 and Mythos 5 (June 9), Sonnet 5 (June 30), Opus 5 (July 24), Fable 5.1 and Mythos 5.1 (September 1). Current lineup: Fable 5.1, Opus 5, Sonnet 5, Haiku 4.5. All current models except Haiku have a 1M context window at standard pricing and 128K output. Sonnet 5's introductory price ($2 / $10 per MTok) was made permanent in August. Fable 5.1 cut cache reads to a quarter of a cent per thousand and removed forced tool choice. Fable 5 was suspended under export controls for about three weeks in June and restored July 1. Retired this window: Haiku 3, Sonnet 4, Opus 4, Opus 4.1. Haiku 4.5's retirement floor is October 15, 2026, so expect a new Haiku.
 
-**What it means.** Any project built in spring 2026 is running model IDs one to two generations old. `temperature` is gone on current models; `effort` replaced `budget_tokens`. Thinking is always on for Fable. Refusals now arrive as a stop reason with a category, and server-side fallbacks exist so a refusal can route to another model. [Chapter 03](./03_the_loop.md).
+**What it means.** Any project built in spring 2026 is running model IDs one to two generations old. `temperature` is gone on current models; `effort` replaced `budget_tokens`. Thinking is always on for Fable. Refusals now arrive as a stop reason with a category, and server-side fallbacks exist so a refusal can route to another model. [Chapter 04](./04_the_loop.md).
 
 **Others** (thin, verify): OpenAI's lineup moved through GPT-5.4, 5.5, 5.6 "Sol," and a GPT-6 "Astra" appeared on leaderboards in September; Google is on Gemini 3.x; Qwen and Muse Spark models lead several agent benchmarks. The Mastra book's "providers and models (March 2026)" table is already stale.
 
@@ -61,7 +61,7 @@ Benchmarks turned over: Terminal-Bench went through 2.1, 3.0, 4.0 and added a sc
 
 ## Security
 
-The year prompt injection became catalogued CVEs rather than a hypothetical: RCE in an agent framework from injected prompts, a Claude Code GitHub Action permission bypass, Anthropic disclosing models escaping eval sandboxes, OWASP's agentic security report with per-project advisory counts and an Agent Control Standard. Anthropic's containment post is the design guidance. [Chapter 08](./08_production.md).
+The year prompt injection became catalogued CVEs rather than a hypothetical: RCE in an agent framework from injected prompts, a Claude Code GitHub Action permission bypass, Anthropic disclosing models escaping eval sandboxes, OWASP's agentic security report with per-project advisory counts and an Agent Control Standard. Anthropic's containment post is the design guidance. [Chapter 09](./09_production.md).
 
 ## Browser agents
 
@@ -73,7 +73,7 @@ Stagehand v4 removed Playwright and runs as a browser extension with non-AI loca
 
 ## What did not change
 
-The loop. The workflow/agent distinction. The five patterns. Tool design as the highest-leverage work. Error analysis before metrics. Binary judgments with critique. The simplest thing that works. Everything in Chapters 01 through 05 was written to survive this list.
+The loop. The workflow/agent distinction. The five patterns. Tool design as the highest-leverage work. Error analysis before metrics. Binary judgments with critique. The simplest thing that works. Everything in Chapters 02 through 06 was written to survive this list.
 
 ## Not re-verified
 

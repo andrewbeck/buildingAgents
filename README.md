@@ -23,7 +23,7 @@ The course has two aims. The first is to learn how agents work and how to build 
 ## What is here
 
 ```
-content/course/   the course: 14 chapters plus a six-week short path
+content/course/   the course: 15 chapters plus a six-week short path
 server/           Express API that serves the content directory (read-only)
 src/              React viewer: markdown, code, Mermaid, search, notes, progress
 ```
@@ -33,30 +33,31 @@ Start at [`content/course/00_start_here.md`](content/course/00_start_here.md). T
 | # | Chapter | One line |
 |---|---|---|
 | 00 | Start here | Who it is for, the spine, how it was made |
-| 01 | Mental models | What an agent is, four frames, a short history, the harness |
-| 02 | When to build | The complexity ladder, the decision tree, the rubric, the autonomy overlay |
-| 03 | The loop | The from-scratch agent on the current API, then the SDK tool runner |
-| 04 | Patterns | The five workflows, the agent, multi-agent shapes, anti-patterns |
-| 05 | Tools and MCP | Tool design, gating, tool evals, the protocol |
-| 06 | Evals | Error analysis first, the eval stack, judges, what to measure |
-| 07 | Context and memory | Write/select/compress/isolate, the four memory types, long-running architecture |
-| 08 | Production | Checklist, threat model, HITL, observability, cost, deployment, graduation rubric |
-| 09 | Multi-agent | When, how, a measured cost ratio, long-running harnesses |
-| 10 | Platforms | The harness/deployment split, Anthropic's four approaches, the landscape |
-| 11 | Projects | A ten-project ladder with specs, acceptance criteria, and lessons from building it |
-| 12 | What changed | April to September 2026, per topic; a template for your own delta pass |
-| 13 | Reading list | Filtered and annotated, with the filter rule and a weekly routine |
+| 01 | What is an LLM | The model under the agent: tokens, pretraining, post-training, what the weights know |
+| 02 | Mental models | What an agent is, four frames, a short history, the harness |
+| 03 | When to build | The complexity ladder, the decision tree, the rubric, the autonomy overlay |
+| 04 | The loop | The from-scratch agent on the current API, then the SDK tool runner |
+| 05 | Patterns | The five workflows, the agent, multi-agent shapes, anti-patterns |
+| 06 | Tools and MCP | Tool design, gating, tool evals, the protocol |
+| 07 | Evals | Error analysis first, the eval stack, judges, what to measure |
+| 08 | Context and memory | Write/select/compress/isolate, the four memory types, long-running architecture |
+| 09 | Production | Checklist, threat model, HITL, observability, cost, deployment, graduation rubric |
+| 10 | Multi-agent | When, how, a measured cost ratio, long-running harnesses |
+| 11 | Platforms | The harness/deployment split, Anthropic's four approaches, the landscape |
+| 12 | Projects | A ten-project ladder with specs, acceptance criteria, and lessons from building it |
+| 13 | What changed | April to September 2026, per topic; a template for your own delta pass |
+| 14 | Reading list | Filtered and annotated, with the filter rule and a weekly routine |
 
-The projects in Chapter 11 are specs, not solutions. You build them.
+The projects in Chapter 12 are specs, not solutions. You build them.
 
 ## Keeping it current, and making it yours
 
 The field moves monthly and this course is a snapshot. Two things to do before relying on it:
 
-- **Bring it up to date.** Chapter 12 is a worked example of a quarterly "what changed" pass. Re-run that exercise for the months since September 2026, then re-verify each snapshot callout against the sources listed at the end of each chapter.
+- **Bring it up to date.** Chapter 13 is a worked example of a quarterly "what changed" pass. Re-run that exercise for the months since September 2026, then re-verify each snapshot callout against the sources listed at the end of each chapter.
 - **Personalize it.** The stack choices (Claude API, LangGraph, TypeScript and Python), the project ladder, and the reading order reflect one engineer's situation. The mental models hold across stacks; the specifics should be swapped. The fastest way is to hand the `content/course/` folder to a coding agent with your own constraints and have it propose edits. That is also a good first exercise in building *with* agents.
 
-Contributions that update a snapshot callout, fix a dead link, or add a source that passes the Chapter 13 filter are welcome.
+Contributions that update a snapshot callout, fix a dead link, or add a source that passes the Chapter 14 filter are welcome.
 
 ## Running the viewer
 

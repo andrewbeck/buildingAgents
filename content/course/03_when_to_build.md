@@ -1,4 +1,4 @@
-# 02 — When to Build an Agent
+# 03 — When to Build an Agent
 
 > A decision procedure for the question "should this be an agent?" and its three follow-ups: how autonomous, how many, and how much can it be allowed to do without asking. This is the most important chapter for your career. After it you should be able to run any new idea through the ladder, the tree, and the rubric in under five minutes and defend the answer.
 
@@ -20,7 +20,7 @@ Read first:
 - **[Learning the Bitter Lesson](https://rlancemartin.github.io/2025/07/30/bitter_lesson/)** (Lance Martin, 2025). Why hand-built structure becomes a bottleneck, which is the argument for starting low on the ladder.
 - **[A Practical Guide to Building Agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)** (OpenAI, 2025). The three "when to build" criteria this chapter reconciles with Anthropic's four.
 
-Read after: **[Agent design patterns](https://rlancemartin.github.io/2026/01/09/agent_design/)** (Lance Martin, 2026) and **[How to think about agent frameworks](https://blog.langchain.com/how-to-think-about-agent-frameworks/)** (Harrison Chase), both in the [when to build tier](./13_reading_list.md#tier-when-to-build).
+Read after: **[Agent design patterns](https://rlancemartin.github.io/2026/01/09/agent_design/)** (Lance Martin, 2026) and **[How to think about agent frameworks](https://blog.langchain.com/how-to-think-about-agent-frameworks/)** (Harrison Chase), both in the [when to build tier](./14_reading_list.md#tier-when-to-build).
 
 ## The complexity ladder
 
@@ -48,7 +48,7 @@ Two rules. Start at the bottom, because a Rung 5 build of a Rung 2 problem is mo
 | 5 | The model must make run-time decisions you could not script | Sub-tasks are independent and parallel, or context pressure is real |
 | 6 | Parallelism, role separation, or context isolation buys measurable wins | You are at the top. Stop. |
 
-There is one more rung that sits beside 5 and 6 rather than above them: the **managed agent**. Same loop, but the vendor hosts it along with a sandbox, sessions, and credential isolation. Reach for it when the job takes minutes to hours, may resume later, or would otherwise require you to build a lot of runtime infrastructure. [Chapter 10](./10_platforms.md) covers the tradeoffs.
+There is one more rung that sits beside 5 and 6 rather than above them: the **managed agent**. Same loop, but the vendor hosts it along with a sandbox, sessions, and credential isolation. Reach for it when the job takes minutes to hours, may resume later, or would otherwise require you to build a lot of runtime infrastructure. [Chapter 11](./11_platforms.md) covers the tradeoffs.
 
 ## The decision tree
 
@@ -126,7 +126,7 @@ When the tree gives an ambiguous answer, score the problem. Zero to two on each 
 
 ## The autonomy overlay
 
-Whatever rung you land on, separately choose the autonomy level (from [Chapter 01](./01_mental_models.md)): Operator, Collaborator, Consultant, Approver, Observer. Default for early builds is Collaborator or Approver. Observer requires evals, scoped tools, monitoring, and rollback, in that order.
+Whatever rung you land on, separately choose the autonomy level (from [Chapter 02](./02_mental_models.md)): Operator, Collaborator, Consultant, Approver, Observer. Default for early builds is Collaborator or Approver. Observer requires evals, scoped tools, monitoring, and rollback, in that order.
 
 The consequence of a wrong action sets the ceiling on autonomy:
 
@@ -138,7 +138,7 @@ The consequence of a wrong action sets the ceiling on autonomy:
 | Legal, financial, security, production, health | Approval plus least privilege, audit, tests, and probably a deterministic workflow |
 | Irreversible and destructive | Avoid, or require explicit multi-step confirmation |
 
-This table is why `send_email` should not exist as a single tool in an early build. `create_email_draft` plus `request_send_approval` is the same capability at Approver level. [Chapter 05](./05_tools_and_mcp.md) develops this.
+This table is why `send_email` should not exist as a single tool in an early build. `create_email_draft` plus `request_send_approval` is the same capability at Approver level. [Chapter 06](./06_tools_and_mcp.md) develops this.
 
 ## Worked examples
 
@@ -185,11 +185,11 @@ And the tripwire for adding a tool at all: **add a tool only when a test case re
 
 **Coding.** Code is verifiable: tests, linters, type checkers give the agent crisp ground truth at every step. That is why agentic coding works better than most other domains and why the entire Claude Code bet exists. If your problem has any programmatically checkable component, agents become much more attractive.
 
-**Long-running and asynchronous.** Migrations, comprehensive research, multi-day analysis. The question here is not "agent vs. workflow," it is "agent vs. nothing," because no human will sit through it. These need a real harness: durable state, a queryable event log, recovery. [Chapter 09](./09_multi_agent.md) and [Chapter 08](./08_production.md).
+**Long-running and asynchronous.** Migrations, comprehensive research, multi-day analysis. The question here is not "agent vs. workflow," it is "agent vs. nothing," because no human will sit through it. These need a real harness: durable state, a queryable event log, recovery. [Chapter 10](./10_multi_agent.md) and [Chapter 09](./09_production.md).
 
 **Computer use and browser agents.** Still the highest-failure category. Many tasks that look browser-shaped are API-shaped underneath; check for the API first. Ship a browser agent only inside the narrow zone: bounded, idempotent, reversible or read-only, observed. Hard step budgets and wall-clock timeouts are mandatory.
 
-> **Snapshot 2026-09.** Anthropic's computer-use toolset and a browser toolset went GA in August 2026, Stagehand hit v4 with Playwright removed, and Cloudflare shipped an agent-first browser. The tooling improved a lot; the risk profile of letting an agent log in somewhere at scale did not. Verify current state in [Chapter 12](./12_whats_new_2026.md) before relying on any of this.
+> **Snapshot 2026-09.** Anthropic's computer-use toolset and a browser toolset went GA in August 2026, Stagehand hit v4 with Playwright removed, and Cloudflare shipped an agent-first browser. The tooling improved a lot; the risk profile of letting an agent log in somewhere at scale did not. Verify current state in [Chapter 13](./13_whats_new_2026.md) before relying on any of this.
 
 ## Red flags on a design review
 

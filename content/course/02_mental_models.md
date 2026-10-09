@@ -1,10 +1,10 @@
-# 01 — Mental Models
+# 02 — Mental Models
 
 > What an agent is, where the idea came from, and the handful of frames you will use on every design decision in the rest of this course. After this chapter you should be able to look at any "agent" product or codebase and say, in one sentence each, what its loop is, what its memory layers are, how autonomous it is, and whether it is really a workflow.
 
 ## Build
 
-- [Project 0](./11_projects.md#project-0--the-rings): [Anthropic's tool-use tutorial](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) as five scripts. Two hours. You do not need the frames in this chapter to run it, and running it first makes the frames concrete. [Chapter 03](./03_the_loop.md) is the commentary; start it now and finish it there.
+- [Project 0](./12_projects.md#project-0--the-rings): [Anthropic's tool-use tutorial](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) as five scripts. Two hours. You do not need the frames in this chapter to run it, and running it first makes the frames concrete. [Chapter 04](./04_the_loop.md) is the commentary; start it now and finish it there.
 
 ## Read
 
@@ -14,7 +14,7 @@ Read first:
 - **[Agents](https://simonwillison.net/2025/Sep/18/agents/)** (Simon Willison, 2025). The one-sentence definition this chapter builds on.
 - **[LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/)** (Lilian Weng, 2023). Once, for where the ideas came from.
 
-Read after: [CoALA](https://arxiv.org/abs/2309.02427) and *[Levels of Autonomy for AI Agents](https://arxiv.org/abs/2506.12469)* for Frames 2 and 4, and the rest of the [mental models and history tier](./13_reading_list.md#tier-mental-models-and-history). Full citations are in Sources at the end of the chapter.
+Read after: [CoALA](https://arxiv.org/abs/2309.02427) and *[Levels of Autonomy for AI Agents](https://arxiv.org/abs/2506.12469)* for Frames 2 and 4, and the rest of the [mental models and history tier](./14_reading_list.md#tier-mental-models-and-history). Full citations are in Sources at the end of the chapter.
 
 ## Three definitions, in order of usefulness
 
@@ -36,7 +36,7 @@ Three parts: a model, a tool surface, a control loop that keeps calling the mode
 
 > An agent is an LLM in a loop with tools, given freedom to decide when it is done.
 
-Everything else in this course is variation on how you implement the loop, expose the tools, manage the state, and decide when to stop. The mark of a senior engineer here is choosing the *lowest*-autonomy design that solves the problem. Autonomy buys flexibility and costs predictability, latency, tokens, and debuggability. [Chapter 02](./02_when_to_build.md) turns that into a procedure.
+Everything else in this course is variation on how you implement the loop, expose the tools, manage the state, and decide when to stop. The mark of a senior engineer here is choosing the *lowest*-autonomy design that solves the problem. Autonomy buys flexibility and costs predictability, latency, tokens, and debuggability. [Chapter 03](./03_when_to_build.md) turns that into a procedure.
 
 ## Four frames you will use constantly
 
@@ -56,7 +56,7 @@ From Feng, McDonald, and Zhang, *[Levels of Autonomy for AI Agents](https://arxi
 | 4 | Approver | Independent worker who needs sign-off | A coding agent that opens a PR for review |
 | 5 | Observer | Fully autonomous | A scheduled background research agent |
 
-Default for a new product build: Collaborator or Approver. Do not ship Observer until you have evals, scoped tools, monitoring, and rollback. [Chapter 08](./08_production.md) has the graduation rubric.
+Default for a new product build: Collaborator or Approver. Do not ship Observer until you have evals, scoped tools, monitoring, and rollback. [Chapter 09](./09_production.md) has the graduation rubric.
 
 ### Frame 3: Three project categories
 
@@ -83,7 +83,7 @@ Sumers et al., *Cognitive Architectures for Language Agents* (arXiv 2309.02427).
 | Semantic | General facts abstracted from experience | Knowledge bases, a `memory.md`, RAG corpora, the model's weights |
 | Procedural | How to do things | Skills, tool definitions, `agents.md`, code the agent runs |
 
-Most "muddled" agent designs are muddling these. If your entire memory story is one vector store, you have collapsed three distinct things into one. [Chapter 07](./07_context_and_memory.md) maps each of these to concrete files in Project 7.
+Most "muddled" agent designs are muddling these. If your entire memory story is one vector store, you have collapsed three distinct things into one. [Chapter 08](./08_context_and_memory.md) maps each of these to concrete files in Project 7.
 
 **Action space.** Internal actions change the agent's own state (think, plan, retrieve). External actions change the world (call an API, write a file, send an email). External actions have consequences and need permissions, logging, and rollback. Conflating the two is how you ship an agent that sends ten thousand emails.
 
@@ -112,11 +112,11 @@ When you meet a new architecture, ask three questions: what memory does it have,
 
 **The framework explosion (2023 to 2024).** LangChain, LangGraph, AutoGen, CrewAI, Pydantic AI, smolagents, and dozens more. By late 2024 the field converged on a definition (LLM plus tools plus loop) and a pattern vocabulary (chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer, autonomous agent) that does not depend on the framework. Anthropic's *Building Effective Agents* crystallized it.
 
-**MCP and standardization (late 2024 onward).** The Model Context Protocol made the agent-to-tool boundary a public protocol, which lets agents and tools evolve independently. That is the same shape as HTTP for the web, and like HTTP it will outlive most of the frameworks built around it. [Chapter 05](./05_tools_and_mcp.md) covers the protocol.
+**MCP and standardization (late 2024 onward).** The Model Context Protocol made the agent-to-tool boundary a public protocol, which lets agents and tools evolve independently. That is the same shape as HTTP for the web, and like HTTP it will outlive most of the frameworks built around it. [Chapter 06](./06_tools_and_mcp.md) covers the protocol.
 
 **Skills, harnesses, managed runtimes (2025 to 2026).** Agent Skills (folders of instructions loaded on demand) solved the unmaintainable-system-prompt problem with progressive disclosure. Anthropic's harness posts shifted attention from "what can the model do" to "what does the code around the model need to do for hours-long tasks." Managed Agents made the harness and the sandbox something you rent instead of build.
 
-> **Snapshot 2026-09.** The frontier conversation has moved again, from context engineering to *harness engineering* (Thoughtworks framed the harness as a specific form of context engineering, split into guides and sensors) and from single long sessions to *managed* runtimes where the vendor owns the loop, the container, and the session log. The Anthropic post that defines the current vocabulary is *Scaling Managed Agents: Decoupling the brain from the hands* (April 2026). See [Chapter 12](./12_whats_new_2026.md).
+> **Snapshot 2026-09.** The frontier conversation has moved again, from context engineering to *harness engineering* (Thoughtworks framed the harness as a specific form of context engineering, split into guides and sensors) and from single long sessions to *managed* runtimes where the vendor owns the loop, the container, and the session log. The Anthropic post that defines the current vocabulary is *Scaling Managed Agents: Decoupling the brain from the hands* (April 2026). See [Chapter 13](./13_whats_new_2026.md).
 
 ## The harness
 
@@ -134,13 +134,13 @@ Two independent questions separate every way of building an agent:
 | Claude Agent SDK / LangGraph / Mastra | SDK | You |
 | Managed Agents | Vendor | Vendor |
 
-Keep this split in mind when reading [Chapter 10](./10_platforms.md). "Framework" and "platform" comparisons that ignore it are comparing apples to warehouses.
+Keep this split in mind when reading [Chapter 11](./11_platforms.md). "Framework" and "platform" comparisons that ignore it are comparing apples to warehouses.
 
 ## Concepts you will keep meeting
 
 **Tool use.** The model emits a structured call (name plus JSON arguments), your code runs it, you feed the result back. Without this the model is a chat partner. Every provider has it natively; the schemas differ slightly, the concept is universal.
 
-**Context window and context rot.** The window is finite, and performance degrades before you hit the limit: recall drops, attention blurs, old turns distract. Fixes are compaction, structured note-taking to disk, and sub-agents with their own windows. [Chapter 07](./07_context_and_memory.md).
+**Context window and context rot.** The window is finite, and performance degrades before you hit the limit: recall drops, attention blurs, old turns distract. Fixes are compaction, structured note-taking to disk, and sub-agents with their own windows. [Chapter 08](./08_context_and_memory.md).
 
 > **Snapshot 2026-09.** Current Claude models (Fable 5.1, Opus 5, Sonnet 5) have a 1M-token window at standard pricing and 128K output. Haiku 4.5 is 200K. Server-side compaction exists as a beta. A 1M window does not remove context rot; it moves the cliff.
 
@@ -148,7 +148,7 @@ Keep this split in mind when reading [Chapter 10](./10_platforms.md). "Framework
 
 **Planning vs. reactive.** A planner decides a sequence in advance; a reactive agent decides each step from current state. ReAct is reactive with reasoning. Modern agents are mostly reactive with light planning up front. Pure planning is brittle because the world changes; pure reactivity is myopic. Hybrid wins.
 
-**Single vs. multi-agent.** Multi-agent buys parallelism, specialization, and context isolation. It costs coordination overhead, tokens, and debuggability. Anthropic's research system reported roughly fifteen times the tokens of a chat; the author's Project 9 build measured about four times on a breadth-first research task, for reasons covered in [Chapter 09](./09_multi_agent.md). Default to single-agent.
+**Single vs. multi-agent.** Multi-agent buys parallelism, specialization, and context isolation. It costs coordination overhead, tokens, and debuggability. Anthropic's research system reported roughly fifteen times the tokens of a chat; the author's Project 9 build measured about four times on a breadth-first research task, for reasons covered in [Chapter 10](./10_multi_agent.md). Default to single-agent.
 
 **Skills.** A folder with a `SKILL.md` (frontmatter plus instructions) and optional scripts and references, loaded only when the task matches the description. Progressive disclosure for capabilities. Now an [open spec at agentskills.io](https://agentskills.io/specification).
 
@@ -157,7 +157,7 @@ Keep this split in mind when reading [Chapter 10](./10_platforms.md). "Framework
 ## Three durable ideas
 
 1. **The simplest thing that works wins.** Most problems do not need agents. Many that need some model intelligence do not need autonomy. When you do need autonomy, less is more.
-2. **The control loop is the agent.** Frameworks abstract it, SDKs hide it, managed runtimes run it for you. Build it from scratch once ([Chapter 03](./03_the_loop.md)) and you will see it everywhere.
+2. **The control loop is the agent.** Frameworks abstract it, SDKs hide it, managed runtimes run it for you. Build it from scratch once ([Chapter 04](./04_the_loop.md)) and you will see it everywhere.
 3. **Memory and tools are design decisions, not plumbing.** Most agent pathologies trace back to muddled memory layers or sloppy tool surfaces.
 
 ## Exercises

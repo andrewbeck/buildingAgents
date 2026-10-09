@@ -20,7 +20,7 @@ This list is weighted toward production rather than introduction. If you have no
 
 ## Tier: mental models and history
 
-Feeds [Mental models](./01_mental_models.md).
+Feeds [Mental models](./02_mental_models.md).
 
 - **LLM Powered Autonomous Agents** (Lilian Weng, 2023). https://lilianweng.github.io/posts/2023-06-23-agent/
   Teaches: planning, memory, and tool use as three pillars, with the paper lineage under each. Read when: once, for vocabulary. Dated in specifics, still the cleanest map of where the ideas came from.
@@ -29,7 +29,7 @@ Feeds [Mental models](./01_mental_models.md).
 - **Agents are models using tools in a loop** (Simon Willison, 2025). https://simonwillison.net/2025/Sep/18/agents/
   Teaches: the definition. Read when: someone starts arguing about the word.
 - **Software Is Changing (Again)** (Andrej Karpathy, Y Combinator, 2025). https://www.youtube.com/watch?v=LCEmiRjPEtQ
-  Teaches: Software 3.0, the autonomy slider, and why partial-autonomy apps with fast verification loops beat full autonomy. Read when: you want the frame behind [When to build](./02_when_to_build.md).
+  Teaches: Software 3.0, the autonomy slider, and why partial-autonomy apps with fast verification loops beat full autonomy. Read when: you want the frame behind [When to build](./03_when_to_build.md).
 - **Squish Meets Structure** and **Language Model Sketchbook** (Maggie Appleton, 2023 and 2024). https://maggieappleton.com/squish-structure and https://maggieappleton.com/lm-sketchbook
   Teaches: expose the agent's procedural steps without overwhelming the user; "spell-check sized" models win in interfaces. Read when: designing what the user sees while the agent works.
 - **Malleable software in the age of LLMs** (Geoffrey Litt, 2023). https://www.geoffreylitt.com/2023/03/25/llm-end-user-programming.html
@@ -39,7 +39,7 @@ Feeds [Mental models](./01_mental_models.md).
 
 ## Tier: when to build
 
-Feeds [When to build](./02_when_to_build.md).
+Feeds [When to build](./03_when_to_build.md).
 
 - **Building Effective Agents** and its reference code: https://github.com/anthropics/anthropic-cookbook/tree/main/patterns/agents. Each pattern is about 100 lines of Python. Run them before reading any framework's docs.
 - **Workflows and agents** (LangChain docs). https://docs.langchain.com/oss/python/langgraph/workflows-agents
@@ -51,11 +51,11 @@ Feeds [When to build](./02_when_to_build.md).
 - **How to think about agent frameworks** (Harrison Chase, LangChain, 2025). https://blog.langchain.com/how-to-think-about-agent-frameworks/
   Teaches: what a framework provides (durability, streaming, HITL) versus what is just abstraction. Read when: choosing or defending a framework.
 - **Not All AI Agents Are Created Equal** (Farooq and Rajwani, Lenny's Newsletter, 2026). https://www.lennysnewsletter.com/p/not-all-ai-agents-are-created-equal
-  Mentioned once, here, as the origin of the three-category framing (deterministic automation, ReAct agent, multi-agent) that [When to build](./02_when_to_build.md) uses. Partly paywalled; the free portion is enough.
+  Mentioned once, here, as the origin of the three-category framing (deterministic automation, ReAct agent, multi-agent) that [When to build](./03_when_to_build.md) uses. Partly paywalled; the free portion is enough.
 
 ## Tier: the loop and tools
 
-Feeds [The loop](./03_the_loop.md) and [Tools and MCP](./05_tools_and_mcp.md).
+Feeds [The loop](./04_the_loop.md) and [Tools and MCP](./06_tools_and_mcp.md).
 
 - **Tool use overview** (Claude docs). https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
   Teaches: the substrate under every framework: schemas, `tool_use` and `tool_result` blocks, parallel calls, strict schemas. Read when: before any framework, and whenever a framework hides something you need.
@@ -72,7 +72,7 @@ Feeds [The loop](./03_the_loop.md) and [Tools and MCP](./05_tools_and_mcp.md).
 
 ## Tier: patterns
 
-Feeds [Patterns](./04_patterns.md). The chapter is a commentary on the Building Effective Agents essay and cookbook, plus:
+Feeds [Patterns](./05_patterns.md). The chapter is a commentary on the Building Effective Agents essay and cookbook, plus:
 
 - **How We Build Effective Agents** (Barry Zhang, Anthropic, AI Engineer talk, 2025). https://www.youtube.com/watch?v=D7_ipDqhtwk
   Teaches: what the essay omits: "think like your agent," and the Q&A. Read when: after the essay, 25 minutes.
@@ -80,7 +80,7 @@ Feeds [Patterns](./04_patterns.md). The chapter is a commentary on the Building 
 
 ## Tier: context and memory
 
-Feeds [Context and memory](./07_context_and_memory.md). This tier folds in the author's annotations from building Project 7, lightly edited and marked "Author's note."
+Feeds [Context and memory](./08_context_and_memory.md). This tier folds in the author's annotations from building Project 7, lightly edited and marked "Author's note."
 
 - **Effective context engineering for AI agents** (Anthropic, 2025). https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
   Teaches: context as an attention budget, context rot, and the compaction / structured note-taking / sub-agent triad. Author's note: the source for the "attention budget" and "context rot" vocabulary; the triad maps directly onto compress, write, and isolate. Re-read before any project where the context starts to bloat.
@@ -105,7 +105,7 @@ Feeds [Context and memory](./07_context_and_memory.md). This tier folds in the a
 
 ## Tier: platforms and MCP
 
-Feeds [Platforms](./10_platforms.md) and [Tools and MCP](./05_tools_and_mcp.md).
+Feeds [Platforms](./11_platforms.md) and [Tools and MCP](./06_tools_and_mcp.md).
 
 - **MCP specification** (2025-11-25 revision). https://modelcontextprotocol.io/specification/2025-11-25
   Teaches: JSON-RPC 2.0, three server primitives, two transports. Read when: before building or trusting any server. One hour.
@@ -130,7 +130,7 @@ Feeds [Platforms](./10_platforms.md) and [Tools and MCP](./05_tools_and_mcp.md).
 
 ## Tier: evals
 
-Feeds [Evals](./06_evals.md).
+Feeds [Evals](./07_evals.md).
 
 - **Your AI Product Needs Evals** (Hamel Husain, 2024). https://hamel.dev/blog/posts/evals/
   Teaches: three levels (unit assertions, human review, A/B) and the Rechat case study. Read when: first, before any tooling.
@@ -153,7 +153,7 @@ Feeds [Evals](./06_evals.md).
 
 ## Tier: production and security
 
-Feeds [Production](./08_production.md).
+Feeds [Production](./09_production.md).
 
 - **The Lethal Trifecta** (Simon Willison, 2025). In the nine. Follow with CaMeL: https://simonwillison.net/2025/Apr/11/camel/ (the one architectural mitigation with a real design behind it) and his running tag: https://simonwillison.net/tags/ai-agents/
 - **How we contain Claude across products** (Anthropic, 2026-05-25). https://www.anthropic.com/engineering/how-we-contain-claude
@@ -167,7 +167,7 @@ Feeds [Production](./08_production.md).
 
 ## Tier: multi-agent and long-running
 
-Feeds [Multi-agent](./09_multi_agent.md).
+Feeds [Multi-agent](./10_multi_agent.md).
 
 - **How we built our multi-agent research system** (Anthropic, 2025). https://www.anthropic.com/engineering/multi-agent-research-system
   Teaches: orchestrator-worker with a lead on the strongest model and parallel workers, and the number that matters: about 15 times the tokens of a chat. Read when: you are about to build a second agent.
@@ -185,7 +185,7 @@ Feeds [Multi-agent](./09_multi_agent.md).
 
 ## Tier: coding, computer-use, and browser agents
 
-Feeds [Projects](./11_projects.md) and [What's new 2026](./12_whats_new_2026.md).
+Feeds [Projects](./12_projects.md) and [What's new 2026](./13_whats_new_2026.md).
 
 - **Claude Code docs**. https://code.claude.com/docs/
   Teaches: hooks, permissions, subagents, MCP configuration, and hard-won design about file operations and command execution. Read when: even if you never build a coding agent; it is the reference harness.

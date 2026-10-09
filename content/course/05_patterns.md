@@ -1,13 +1,13 @@
-# 04 — Patterns
+# 05 — Patterns
 
 > The pattern vocabulary from *Building Effective Agents*, with what each one fixes, what it leaves to the model, when it is the wrong choice, and where the workflow/agent boundary shows up in Project 4. After this chapter you can factor any agent design into named pieces and say which piece is the workflow and which piece is the agent.
 
-Every pattern here is a constraint or a composition on the loop from [Chapter 03](./03_the_loop.md). Prompt chaining is the loop with no model decisions. Routing is the loop with one tool that picks a branch. Orchestrator-workers is the loop where one tool spawns sub-loops. Keep that in mind and the catalog stops feeling like a list to memorize.
+Every pattern here is a constraint or a composition on the loop from [Chapter 04](./04_the_loop.md). Prompt chaining is the loop with no model decisions. Routing is the loop with one tool that picks a branch. Orchestrator-workers is the loop where one tool spawns sub-loops. Keep that in mind and the catalog stops feeling like a list to memorize.
 
 ## Build
 
-- [Project 3](./11_projects.md#project-3--thinking-in-graphs): triage with two approval gates. Routing into a chain, with the human in the loop, in a graph where the model never picks the next node.
-- [Project 4](./11_projects.md#project-4--the-five-workflow-patterns): the five workflows plus evaluator-optimizer, six files under 100 lines each. The checkpoint at the end of this chapter assumes you have them.
+- [Project 3](./12_projects.md#project-3--thinking-in-graphs): triage with two approval gates. Routing into a chain, with the human in the loop, in a graph where the model never picks the next node.
+- [Project 4](./12_projects.md#project-4--the-five-workflow-patterns): the five workflows plus evaluator-optimizer, six files under 100 lines each. The checkpoint at the end of this chapter assumes you have them.
 
 ## Read
 
@@ -17,7 +17,7 @@ Read first:
 - **[How We Build Effective Agents](https://www.youtube.com/watch?v=D7_ipDqhtwk)** (Barry Zhang, AI Engineer talk, 2025). Twenty-five minutes; what the essay omits.
 - **[Workflows and agents](https://docs.langchain.com/oss/python/langgraph/workflows-agents)** (LangChain docs). The same patterns in LangGraph code.
 
-Read after: **[Agent design patterns](https://rlancemartin.github.io/2026/01/09/agent_design/)** (Lance Martin, 2026), in the [patterns tier](./13_reading_list.md#tier-patterns).
+Read after: **[Agent design patterns](https://rlancemartin.github.io/2026/01/09/agent_design/)** (Lance Martin, 2026), in the [patterns tier](./14_reading_list.md#tier-patterns).
 
 ## 0. The augmented LLM
 
@@ -63,13 +63,13 @@ In every one of these the model chooses *what to write* but never *what node run
 
 ## 6. The autonomous agent
 
-LLM plus tools plus a while-loop, no predefined path. The model decides each turn whether to call a tool, reflect, or finish. Everything in [Chapter 03](./03_the_loop.md).
+LLM plus tools plus a while-loop, no predefined path. The model decides each turn whether to call a tool, reflect, or finish. Everything in [Chapter 04](./04_the_loop.md).
 
 Required controls, all of them: max steps, max cost, max wall-clock, explicit stop reasons (`done | needs_human | blocked | failed_safely`), a tool allowlist, approval gates on side effects, a trace log. Stopping condition is everything. Tool surface design dominates quality. Observability is not optional.
 
 ## 7. Multi-agent shapes
 
-Less a pattern than a family of compositions. [Chapter 09](./09_multi_agent.md) covers cost and coordination; here are the shapes.
+Less a pattern than a family of compositions. [Chapter 10](./10_multi_agent.md) covers cost and coordination; here are the shapes.
 
 | Shape | What it is | When | Failure mode |
 |---|---|---|---|
@@ -85,7 +85,7 @@ Less a pattern than a family of compositions. [Chapter 09](./09_multi_agent.md) 
 
 Three more shapes show up in every serious system. They are not orchestration patterns, they are where safety lives.
 
-- **Human-in-the-loop approval.** Agent proposes → policy gate → human approves, rejects, or edits → agent continues. Use for sends, deletes, purchases, deploys, external comms, regulated decisions. [Chapter 08](./08_production.md) has the four HITL patterns.
+- **Human-in-the-loop approval.** Agent proposes → policy gate → human approves, rejects, or edits → agent continues. Use for sends, deletes, purchases, deploys, external comms, regulated decisions. [Chapter 09](./09_production.md) has the four HITL patterns.
 - **Sandbox execution.** Agent → isolated environment with limited network, scoped credentials, disposable state, audit log → result. Use for generated code, shell, file edits, browser automation, untrusted documents.
 - **Retrieval plus verification.** Retrieve → extract claims → verify each claim against its source → answer with citations. Use for anything where truth matters. Failure modes: retrieval misses the key source, the source is stale, the model cites a source that does not support the claim. Project 5's `save_report` citation enforcement is this pattern.
 
@@ -100,7 +100,7 @@ The patterns are vocabulary, not rules. The win is being able to say "this is ro
 - **Plan-then-execute with no real planning.** "First plan, then execute" in a prompt produces plan-shaped tokens the model then ignores. Either commit to a real planner step with an output schema and validation, or drop it.
 - **Agent of agents for variety.** If sub-agents share prompt and tools, you built a more expensive agent.
 - **Reflection at every step.** Add reflection where it changes the trajectory. Remove it where it is ritual.
-- **Memory as a vector dump of everything.** Without retrieval discipline this generates noise. [Chapter 07](./07_context_and_memory.md).
+- **Memory as a vector dump of everything.** Without retrieval discipline this generates noise. [Chapter 08](./08_context_and_memory.md).
 
 > **Author's note,** on the [harness-design post](https://www.anthropic.com/engineering/harness-design-long-running-apps): "agents doing self-eval are often over-confident; separate eval works better." That is the reason evaluator-optimizer exists as a distinct pattern instead of a line in the generator's prompt.
 

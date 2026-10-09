@@ -1,4 +1,4 @@
-# 08 — Production: Guardrails, Security, Observability, Operations
+# 09 — Production: Guardrails, Security, Observability, Operations
 
 > Everything between "works on my machine" and "I'd bet money on it." After this chapter you have a shipping checklist you can point to artifacts for, a threat model you can defend, a logging schema, a human-in-the-loop vocabulary, and a graduation rubric that tells you when an agent is allowed to run unattended.
 
@@ -6,7 +6,7 @@ The rule that organizes the chapter: **if you can't point to the artifact, you h
 
 ## Build
 
-- [Project 8](./11_projects.md#project-8--ship-it-on-managed-agents): deploy the Project 7 agent on Managed Agents, on a schedule, with a budget, a vault, and confirmation round trips. The shipping checklist in this chapter is the acceptance test; the postmortem names what the managed runtime did better and what it hid.
+- [Project 8](./12_projects.md#project-8--ship-it-on-managed-agents): deploy the Project 7 agent on Managed Agents, on a schedule, with a budget, a vault, and confirmation round trips. The shipping checklist in this chapter is the acceptance test; the postmortem names what the managed runtime did better and what it hid.
 - Also fill in the shipping checklist and the graduation rubric for Project 5. The rows you cannot fill are the work.
 
 ## Read
@@ -17,7 +17,7 @@ Read first:
 - **[How we contain Claude across products](https://www.anthropic.com/engineering/how-we-contain-claude)** (Anthropic, 2026). Boundaries enforced, not prompted.
 - **[Prompt injection defenses](https://www.anthropic.com/news/prompt-injection-defenses)** (Anthropic). What model-side defenses do not cover.
 
-Read after: [CaMeL](https://simonwillison.net/2025/Apr/11/camel/), the **[OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)**, and **[Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)** when cost is dominated by re-sent prefixes. All in the [production and security tier](./13_reading_list.md#tier-production-and-security); [Managed Agents docs](https://platform.claude.com/docs/en/managed-agents/overview) are in the [platforms and MCP tier](./13_reading_list.md#tier-platforms-and-mcp).
+Read after: [CaMeL](https://simonwillison.net/2025/Apr/11/camel/), the **[OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)**, and **[Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)** when cost is dominated by re-sent prefixes. All in the [production and security tier](./14_reading_list.md#tier-production-and-security); [Managed Agents docs](https://platform.claude.com/docs/en/managed-agents/overview) are in the [platforms and MCP tier](./14_reading_list.md#tier-platforms-and-mcp).
 
 ## The shipping checklist
 

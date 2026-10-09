@@ -1,14 +1,14 @@
-# 03 — The Loop
+# 04 — The Loop
 
 > Build the agent loop from scratch, on the raw Messages API, with no framework. Then see the same loop in the SDK's tool runner. After this chapter you can write a working agent from memory, explain every line, and recognize the loop inside any framework you open.
 
-The single best predictor of whether someone can debug an agent in production is whether they can write the loop without looking it up. Projects 0, 1, and 2 in [Chapter 11](./11_projects.md) are where you do it. This chapter is the current-API version of that loop, including the parts that are wrong or missing in most tutorial code.
+The single best predictor of whether someone can debug an agent in production is whether they can write the loop without looking it up. Projects 0, 1, and 2 in [Chapter 12](./12_projects.md) are where you do it. This chapter is the current-API version of that loop, including the parts that are wrong or missing in most tutorial code.
 
 ## Build
 
-- [Project 0](./11_projects.md#project-0--the-rings): the tutorial as five scripts, one per ring. Do it before reading past "The four ideas" if you have not already.
-- [Project 1](./11_projects.md#project-1--hello-agent): the manual loop with two tools, no framework. The from-scratch agent in this chapter is the reference implementation.
-- [Project 2](./11_projects.md#project-2--thinking-agent): trace log, token budget, and an effort-level A/B. Exercises 3 to 6 below are the steps that turn Project 1 into Project 2.
+- [Project 0](./12_projects.md#project-0--the-rings): the tutorial as five scripts, one per ring. Do it before reading past "The four ideas" if you have not already.
+- [Project 1](./12_projects.md#project-1--hello-agent): the manual loop with two tools, no framework. The from-scratch agent in this chapter is the reference implementation.
+- [Project 2](./12_projects.md#project-2--thinking-agent): trace log, token budget, and an effort-level A/B. Exercises 3 to 6 below are the steps that turn Project 1 into Project 2.
 
 ## Read
 
@@ -17,7 +17,7 @@ Read first:
 - **[Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)** (Claude docs). The substrate: schemas, `tool_use` and `tool_result` blocks, parallel calls, stop reasons.
 - **[Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)** (Anthropic, 2025). Gather, act, verify, and why filesystem plus bash is a general tool surface.
 
-Read after: **[Claude Agent SDK overview](https://platform.claude.com/docs/en/agent-sdk/overview)** once you commit to it, and **[Code Mode](https://blog.cloudflare.com/code-mode/)** (Cloudflare) when tool count or tool output starts to crowd the window. Both in the [the loop and tools tier](./13_reading_list.md#tier-the-loop-and-tools).
+Read after: **[Claude Agent SDK overview](https://platform.claude.com/docs/en/agent-sdk/overview)** once you commit to it, and **[Code Mode](https://blog.cloudflare.com/code-mode/)** (Cloudflare) when tool count or tool output starts to crowd the window. Both in the [the loop and tools tier](./14_reading_list.md#tier-the-loop-and-tools).
 
 ## The four ideas
 
@@ -33,7 +33,7 @@ Rules that hold:
 - Say briefly what the tool returns.
 - Do not repeat tool instructions in the system prompt. Duplication drifts.
 
-[Chapter 05](./05_tools_and_mcp.md) goes deep on tool design. Here we just need enough to run the loop.
+[Chapter 06](./06_tools_and_mcp.md) goes deep on tool design. Here we just need enough to run the loop.
 
 ### 2. The loop is a while-loop with three exits
 
@@ -318,7 +318,7 @@ const final = await runner;
 
 The docstring (Python) or `description` (TypeScript) becomes the tool description. The type hints or Zod schema become the input schema. You lose nothing you had in the manual loop and gain hooks, streaming, retries, and compaction support.
 
-**Tool runner is not the Claude Agent SDK.** The tool runner is a thin helper inside the regular API SDK: your tools, your hosting, no built-in tools. The Claude Agent SDK is Claude Code packaged as a library: built-in file, bash, grep, and web tools, subagents, hooks, permissions, sessions. Both are harness-only; you still deploy them. [Chapter 10](./10_platforms.md).
+**Tool runner is not the Claude Agent SDK.** The tool runner is a thin helper inside the regular API SDK: your tools, your hosting, no built-in tools. The Claude Agent SDK is Claude Code packaged as a library: built-in file, bash, grep, and web tools, subagents, hooks, permissions, sessions. Both are harness-only; you still deploy them. [Chapter 11](./11_platforms.md).
 
 ## What the API now does for you
 

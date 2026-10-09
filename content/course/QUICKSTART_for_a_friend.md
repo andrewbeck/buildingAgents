@@ -26,7 +26,7 @@ An agent is a language model in a loop with tools, given freedom to decide when 
 
 **Build**
 - The five tutorial stages: one tool, then a loop, then several tools, then errors, then the SDK tool runner.
-- Then a 100-line agent with three tools (calculator, search, save-to-file) and no framework. The code is in `03_the_loop.md`.
+- Then a 100-line agent with three tools (calculator, search, save-to-file) and no framework. The code is in `04_the_loop.md`.
 
 **Know by the end:** the loop is `while stop_reason == "tool_use"`, tool results go back in one message, and you always need a step cap and a token budget. Tool *descriptions* matter more than the system prompt.
 
@@ -39,7 +39,7 @@ An agent is a language model in a loop with tools, given freedom to decide when 
 **Build**
 - The five workflow patterns (chaining, routing, parallel, orchestrator-workers, evaluator-optimizer), each in under 100 lines, in LangGraph or plain code.
 
-**Know by the end:** the complexity ladder. Start at "one prompt," climb to "workflow," and only reach "agent" when the model must make decisions you could not script. Chapter `02_when_to_build.md` has the decision tree.
+**Know by the end:** the complexity ladder. Start at "one prompt," climb to "workflow," and only reach "agent" when the model must make decisions you could not script. Chapter `03_when_to_build.md` has the decision tree.
 
 ## Week 4 — A real agent, and its context
 
@@ -84,7 +84,7 @@ An agent is a language model in a loop with tools, given freedom to decide when 
 - Keep current with two hours a week: the [Anthropic engineering blog](https://www.anthropic.com/engineering), the [MCP blog](https://blog.modelcontextprotocol.io/), [Simon Willison](https://simonwillison.net/tags/ai-agents/), Latent Space.
 - Free book that covers the same ground from a framework author's view: Sam Bhagwat, *Principles of Building AI Agents*: https://mastra.ai/book
 - Free courses if you want structure: LangChain Academy (LangGraph), Hugging Face Agents Course.
-- The full course in this folder starts at `00_start_here.md`; the filtered reading list is `13_reading_list.md`.
+- The full course in this folder starts at `00_start_here.md`; the filtered reading list is `14_reading_list.md`.
 
 ## The three ideas that will still be true in five years
 
