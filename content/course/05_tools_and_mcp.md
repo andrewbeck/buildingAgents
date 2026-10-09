@@ -13,15 +13,15 @@ Anthropic's phrase for this is the **agent-computer interface (ACI)**. The frami
 
 Read first:
 
-- **Writing tools for agents** (Anthropic, 2025). Tool count and overlap degrade performance; consolidate, namespace, return semantic identifiers, cap output.
-- **Tool use overview** (Claude docs), the strict-schema and parallel-call sections.
-- **Introducing the Model Context Protocol** (Anthropic, 2024). Ten minutes; the N-by-M argument.
+- **[Writing tools for agents](https://www.anthropic.com/engineering/writing-tools-for-agents)** (Anthropic, 2025). Tool count and overlap degrade performance; consolidate, namespace, return semantic identifiers, cap output.
+- **[Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)** (Claude docs), the strict-schema and parallel-call sections.
+- **[Introducing the Model Context Protocol](https://www.anthropic.com/news/model-context-protocol)** (Anthropic, 2024). Ten minutes; the N-by-M argument.
 
-Read after: the **MCP specification** before building or trusting any server, and **Code Mode** (Cloudflare). See the [the loop and tools tier](./13_reading_list.md#tier-the-loop-and-tools) and the [platforms and MCP tier](./13_reading_list.md#tier-platforms-and-mcp).
+Read after: the **[MCP specification](https://modelcontextprotocol.io/specification/2025-11-25)** before building or trusting any server, and **[Code Mode](https://blog.cloudflare.com/code-mode/)** (Cloudflare). See the [the loop and tools tier](./13_reading_list.md#tier-the-loop-and-tools) and the [platforms and MCP tier](./13_reading_list.md#tier-platforms-and-mcp).
 
 ## Think like an analyst
 
-The Mastra book's tool-design story is the right starting frame. An investor tried dumping her whole library of books into the context window and the agent could not reason about it. She then wrote out the operations a human analyst would run (books by genre, recommendations by investor, sort recommenders by type) and made each one a tool. The agent became useful immediately.
+The [Mastra book](https://mastra.ai/book)'s tool-design story is the right starting frame. An investor tried dumping her whole library of books into the context window and the agent could not reason about it. She then wrote out the operations a human analyst would run (books by genre, recommendations by investor, sort recommenders by type) and made each one a tool. The agent became useful immediately.
 
 The procedure: before coding, write down the list of operations a competent human would perform to do this job. Each one is a candidate tool. Then apply the cuts below.
 
@@ -113,11 +113,11 @@ Two features that change tool-surface design:
 
 ## Evaluating tools
 
-Tool evals are their own layer under agent evals. For each tool, cases that check: called when it should be, not called when it should not, correct arguments, correct handling of an error result, and the number of unnecessary calls. The Project 5 failure described in [Chapter 11](./11_projects.md) (five search calls re-querying variations before a single fetch) is a tool-selection eval waiting to be written. The fix, budgeting fetches *and* total calls separately, is a description change, which is where most tool fixes live. Anthropic's cookbook has a tool-evaluation notebook worth running once.
+Tool evals are their own layer under agent evals ([Anthropic's tool-evaluation cookbook](https://platform.claude.com/cookbook/tool-evaluation-tool-evaluation) is the worked example). For each tool, cases that check: called when it should be, not called when it should not, correct arguments, correct handling of an error result, and the number of unnecessary calls. The Project 5 failure described in [Chapter 11](./11_projects.md) (five search calls re-querying variations before a single fetch) is a tool-selection eval waiting to be written. The fix, budgeting fetches *and* total calls separately, is a description change, which is where most tool fixes live. Anthropic's cookbook has a tool-evaluation notebook worth running once.
 
 ## MCP
 
-The Model Context Protocol is an open, JSON-RPC 2.0 standard for connecting LLM applications to tools, resources, and prompts. Before it, every integration was bespoke per model and per tool. It is now the default integration boundary across Anthropic, OpenAI, Google, and Microsoft, and the mental model that holds is REST for client-server: MCP is not about what a tool does, it is about how the conversation between agent and tool is structured.
+The [Model Context Protocol](https://modelcontextprotocol.io/specification/2025-11-25) is an open, JSON-RPC 2.0 standard for connecting LLM applications to tools, resources, and prompts. Before it, every integration was bespoke per model and per tool. It is now the default integration boundary across Anthropic, OpenAI, Google, and Microsoft, and the mental model that holds is REST for client-server: MCP is not about what a tool does, it is about how the conversation between agent and tool is structured.
 
 **Primitives.** Servers expose *tools* (actions), *resources* (read-only context), and *prompts* (reusable templates). Clients can also offer sampling and elicitation back to servers. Transports are stdio for local subprocesses and streamable HTTP for remote servers. Capabilities are negotiated on connect.
 

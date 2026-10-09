@@ -13,11 +13,11 @@ Read every framework against the twelve things a framework can add (from [Chapte
 
 Read first:
 
-- **MCP specification** (2025-11-25 revision). One hour, before building or trusting any server.
-- **Scaling Managed Agents: Decoupling the brain from the hands** (Anthropic, 2026). Session, harness, sandbox, and why harness assumptions go stale.
-- **How to think about agent frameworks** (Harrison Chase, 2025). What a framework provides versus what is just abstraction.
+- **[MCP specification](https://modelcontextprotocol.io/specification/2025-11-25)** (2025-11-25 revision). One hour, before building or trusting any server.
+- **[Scaling Managed Agents: Decoupling the brain from the hands](https://www.anthropic.com/engineering/managed-agents)** (Anthropic, 2026). Session, harness, sandbox, and why harness assumptions go stale.
+- **[How to think about agent frameworks](https://blog.langchain.com/how-to-think-about-agent-frameworks/)** (Harrison Chase, 2025). What a framework provides versus what is just abstraction.
 
-Read after: the **MCP Inspector** and registry while building the server, and the LangGraph, Vercel AI SDK, and Cloudflare Agents docs as you need them. All in the [platforms and MCP tier](./13_reading_list.md#tier-platforms-and-mcp).
+Read after: the **[MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector)** and [registry](https://github.com/modelcontextprotocol/registry) while building the server, and the LangGraph, Vercel AI SDK, and Cloudflare Agents docs as you need them. All in the [platforms and MCP tier](./13_reading_list.md#tier-platforms-and-mcp).
 
 ## The two questions
 
@@ -34,8 +34,8 @@ Every option answers two independent questions. Comparisons that ignore this com
 |---|---|---|---|---|
 | 1 | Manual loop | The `while stop_reason == "tool_use"` loop | Yours | You want to own the whole loop, or a control flow the runner's hooks do not fit |
 | 2 | SDK tool runner | Just the tool functions | Yours | A custom-tool agent without hand-writing the loop. Most cases. Per-turn hooks give approval gates, error interception, result modification, retries, streaming, compaction |
-| 3 | Managed Agents | Agent config and your tool results | Anthropic sandbox (bash, files, code) + skills + MCP + yours | Anthropic runs the loop and hosts a per-session workspace; persisted versioned configs; long sessions; scheduled runs |
-| 4 | Claude Agent SDK | A prompt and options | Built-in Read/Write/Edit/Bash/Glob/Grep/WebSearch/WebFetch + MCP + sub-agents | A batteries-included coding or filesystem agent on your own infra |
+| 3 | [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview) | Agent config and your tool results | Anthropic sandbox (bash, files, code) + skills + MCP + yours | Anthropic runs the loop and hosts a per-session workspace; persisted versioned configs; long sessions; scheduled runs |
+| 4 | [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) | A prompt and options | Built-in Read/Write/Edit/Bash/Glob/Grep/WebSearch/WebFetch + MCP + sub-agents | A batteries-included coding or filesystem agent on your own infra |
 
 Tool runner and Agent SDK sound alike and are different packages. The runner is a thin helper in the regular API SDK. The Agent SDK is Claude Code as a library: hooks, permissions, sessions, sub-agents, skills, plugins. Both are harness-only.
 
@@ -116,7 +116,7 @@ Pick a primary by Project 4 and do not switch until Project 6. Each switch adds 
 ## Exercises
 
 1. For each of Projects 4, 5, 7, and 9, list which of the twelve framework additions you used. Count how many you would miss if the framework vanished.
-2. Build the Project 10 server and run the MCP Inspector against it before any model sees it.
+2. Build the Project 10 server and run the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) against it before any model sees it.
 3. Plant "ignore previous instructions" in one catalog record and confirm the agent's behavior does not change. Write down what would have to be true for it to change.
 4. Write the stack justification sentence for a new project of your own, and the sentence for the stack you would have chosen before this course.
 

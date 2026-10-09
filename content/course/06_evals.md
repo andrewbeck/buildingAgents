@@ -11,11 +11,11 @@
 
 Read first:
 
-- **Your AI Product Needs Evals** (Hamel Husain, 2024). Three levels and the Rechat case study. Before any tooling.
-- **LLM Evals FAQ** (Husain and Shankar, 2025). How many examples, binary versus Likert, who arbitrates.
-- **Demystifying evals for AI agents** (Anthropic, 2026). Agent evals are trajectory evals.
+- **[Your AI Product Needs Evals](https://hamel.dev/blog/posts/evals/)** (Hamel Husain, 2024). Three levels and the Rechat case study. Before any tooling.
+- **[LLM Evals FAQ](https://hamel.dev/blog/posts/evals-faq/)** (Husain and Shankar, 2025). How many examples, binary versus Likert, who arbitrates.
+- **[Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)** (Anthropic, 2026). Agent evals are trajectory evals.
 
-Read after: **LLM-as-a-Judge** and **Field Guide to Rapidly Improving AI Products** (Husain) before adding a judge; Eugene Yan's three pieces when your judge disagrees with you. All in the [evals tier](./13_reading_list.md#tier-evals).
+Read after: **[LLM-as-a-Judge](https://hamel.dev/blog/posts/llm-judge/)** and **[Field Guide to Rapidly Improving AI Products](https://hamel.dev/blog/posts/field-guide/)** (Husain) before adding a judge; Eugene Yan's three pieces when your judge disagrees with you. All in the [evals tier](./13_reading_list.md#tier-evals).
 
 ## Why evals are the whole job
 
@@ -23,13 +23,13 @@ Every other chapter describes something you build once. Evals are the thing you 
 
 Three convictions run through every serious source on this topic. The rest of the chapter is a long footnote to them.
 
-1. **The metric is downstream of the look.** You cannot define "good" until you have read a few hundred raw traces. Criteria emerge from observation. Shankar et al. named this *criteria drift*: you need criteria to grade outputs, but grading outputs is what teaches you the criteria.
+1. **The metric is downstream of the look.** You cannot define "good" until you have read a few hundred raw traces. Criteria emerge from observation. [Shankar et al.](https://arxiv.org/abs/2404.12272) named this *criteria drift*: you need criteria to grade outputs, but grading outputs is what teaches you the criteria.
 2. **Binary, with critique.** Pass/fail forces a decision. A written reason forces a rationale. A 1 to 5 scale hides both behind an average.
 3. **The judge is a model you train.** An LLM-as-judge is not a metric you import. It is a small model you align to one domain expert until you trust its votes on data it has not seen.
 
 Hamel's own description of why he pushes LLM judges is the honest one: "Creating an LLM judge is a nice hack I use to trick people into carefully looking at their data." The judge is the excuse. The looking is the work.
 
-Start now, with five examples. Teams delay evals because they imagine a real eval needs hundreds of cases. Anthropic's multi-agent research team started with roughly 20 queries, and one prompt change moved success from about 30% to 80%. At that signal-to-noise ratio you do not need n=2000. You need a good n=20 and the willingness to read every one.
+Start now, with five examples. Teams delay evals because they imagine a real eval needs hundreds of cases. [Anthropic's multi-agent research team](https://www.anthropic.com/engineering/multi-agent-research-system) started with roughly 20 queries, and one prompt change moved success from about 30% to 80%. At that signal-to-noise ratio you do not need n=2000. You need a good n=20 and the willingness to read every one.
 
 ## The eval stack
 
@@ -99,7 +99,7 @@ Hamel's discipline, the one most teams skip: only automate an eval for a failure
 
 ### Three sources
 
-Bhagwat lists the three ways to get cases, and a mature set is a mix of all three:
+[Bhagwat](https://mastra.ai/book) lists the three ways to get cases, and a mature set is a mix of all three:
 
 | Source | Strength | Watch for |
 |---|---|---|
@@ -139,7 +139,7 @@ Hamel's recipe: hand-write about 20 tuples, ask a model for 200 variations on th
 
 ### How many traces
 
-Eugene Yan's product-evals essay gives one formula worth memorizing. To estimate a defect rate `p` within margin `E` at confidence `z`:
+[Eugene Yan's product-evals essay](https://eugeneyan.com/writing/product-evals/) gives one formula worth memorizing. To estimate a defect rate `p` within margin `E` at confidence `z`:
 
 ```
 n = (z² · p · (1 − p)) / E²
@@ -273,7 +273,7 @@ Anthropic's multi-agent research system, the one Project 9 is modeled on, shippe
 
 One model, one prompt, most aligned with humans of everything they tried. The bias humans caught that the judge missed: early agents preferred SEO content farms over academic PDFs. The judge graded factual accuracy correctly; only a human noticed the drift in *where* facts came from. That became the source-quality axis. Judges find errors. Humans find kinds of errors the judge was never told to look for.
 
-Anthropic's tool-evaluation cookbook flips the frame: have the agent grade your tools by emitting a `<feedback>` block on what was confusing, then have a coding agent rewrite the tool descriptions from the stack of feedback, checked against held-out tasks. See [Tools and MCP](./05_tools_and_mcp.md).
+[Anthropic's tool-evaluation cookbook](https://platform.claude.com/cookbook/tool-evaluation-tool-evaluation) flips the frame: have the agent grade your tools by emitting a `<feedback>` block on what was confusing, then have a coding agent rewrite the tool descriptions from the stack of feedback, checked against held-out tasks. See [Tools and MCP](./05_tools_and_mcp.md).
 
 ### Cost per win
 

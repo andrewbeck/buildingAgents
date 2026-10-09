@@ -81,7 +81,7 @@ An agent is a language model in a loop with tools, given freedom to decide when 
 
 ## After that
 
-- Keep current with two hours a week: the Anthropic engineering blog, the MCP blog, Simon Willison, Latent Space.
+- Keep current with two hours a week: the [Anthropic engineering blog](https://www.anthropic.com/engineering), the [MCP blog](https://blog.modelcontextprotocol.io/), [Simon Willison](https://simonwillison.net/tags/ai-agents/), Latent Space.
 - Free book that covers the same ground from a framework author's view: Sam Bhagwat, *Principles of Building AI Agents*: https://mastra.ai/book
 - Free courses if you want structure: LangChain Academy (LangGraph), Hugging Face Agents Course.
 - The full course in this folder starts at `00_start_here.md`; the filtered reading list is `13_reading_list.md`.

@@ -10,11 +10,11 @@
 
 Read first:
 
-- **How we built our multi-agent research system** (Anthropic, 2025). The shape Project 9 copies, and the fifteen-times-the-tokens number.
-- **Don't Build Multi-Agents** (Cognition, 2025). Immediately after. Parallelize read-only work, serialize writes.
-- **Effective harnesses for long-running agents** (Anthropic, 2025). The harness, not the model, owns durability.
+- **[How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system)** (Anthropic, 2025). The shape Project 9 copies, and the fifteen-times-the-tokens number.
+- **[Don't Build Multi-Agents](https://cognition.ai/blog/dont-build-multi-agents)** (Cognition, 2025). Immediately after. Parallelize read-only work, serialize writes.
+- **[Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)** (Anthropic, 2025). The harness, not the model, owns durability.
 
-Read after: **Benchmarking Multi-Agent Architectures** (LangChain) for numbers, **Open Deep Research** to compare against your own build, and **Harness design for long-running application development**. All in the [multi-agent and long-running tier](./13_reading_list.md#tier-multi-agent-and-long-running).
+Read after: **[Benchmarking Multi-Agent Architectures](https://blog.langchain.com/benchmarking-multi-agent-architectures/)** (LangChain) for numbers, **[Open Deep Research](https://blog.langchain.com/open-deep-research/)** to compare against your own build, and **[Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)**. All in the [multi-agent and long-running tier](./13_reading_list.md#tier-multi-agent-and-long-running).
 
 ## The default is one agent
 
@@ -32,9 +32,9 @@ Single-agent with good tools handles more than people expect. Add tools before a
 
 ## Why it works when it works
 
-Anthropic's research system: multi-agent beat single-agent Opus by a wide margin on breadth-first research, and token usage explained roughly eighty percent of the performance variance. Parallel context windows let more tokens work on the problem at once. That is the mechanism. It also means the cost is the feature: their system used about fifteen times the tokens of a chat.
+[Anthropic's research system](https://www.anthropic.com/engineering/multi-agent-research-system): multi-agent beat single-agent Opus by a wide margin on breadth-first research, and token usage explained roughly eighty percent of the performance variance. Parallel context windows let more tokens work on the problem at once. That is the mechanism. It also means the cost is the feature: their system used about fifteen times the tokens of a chat.
 
-Good fit: breadth-first tasks with parallelizable sub-tasks (research, broad data gathering, multi-file surveys). Bad fit: tightly coupled tasks where context must be shared, which is most coding. Cognition's *Don't Build Multi-Agents* is the canonical statement of the failure: sub-agents make conflicting decisions because neither sees the other's context, and reconciliation costs more than the parallelism saved.
+Good fit: breadth-first tasks with parallelizable sub-tasks (research, broad data gathering, multi-file surveys). Bad fit: tightly coupled tasks where context must be shared, which is most coding. Cognition's *[Don't Build Multi-Agents](https://cognition.ai/blog/dont-build-multi-agents)* is the canonical statement of the failure: sub-agents make conflicting decisions because neither sees the other's context, and reconciliation costs more than the parallelism saved.
 
 ## One measured example: Project 9
 
@@ -89,7 +89,7 @@ A task that runs for hours is a different engineering problem from a task that r
 
 The event-log / active-context split from [Chapter 07](./07_context_and_memory.md) is the concrete architecture. Add to it: a task budget the model can see (so it paces itself instead of being cut off), server-side compaction, structured notes to disk, a stop-reason vocabulary (`done | needs_human | blocked | failed_safely | budget_reached`), and a way to resume from the log after a restart.
 
-> **Snapshot 2026-09.** Measured autonomy horizons roughly doubled this year (METR's fifty-percent time horizon for frontier models is now measured in many hours and their task suite tops out). Current Claude models ship with 1M context, 128K output, a memory tool, compaction, and task budgets specifically for this. Managed Agents adds session budgets in dollars, scheduled deployments, and webhooks on session events. The practical implication: fewer tasks need multi-agent to work around context limits, and more need a harness that can run a single agent for a long time safely.
+> **Snapshot 2026-09.** Measured autonomy horizons roughly doubled this year ([METR's fifty-percent time horizon](https://metr.org/time-horizons/) for frontier models is now measured in many hours and their task suite tops out). Current Claude models ship with 1M context, 128K output, a memory tool, compaction, and task budgets specifically for this. Managed Agents adds session budgets in dollars, scheduled deployments, and webhooks on session events. The practical implication: fewer tasks need multi-agent to work around context limits, and more need a harness that can run a single agent for a long time safely.
 
 ## When to reach for Managed Agents instead
 

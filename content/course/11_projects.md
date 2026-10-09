@@ -35,7 +35,7 @@ The stack notes below assume the Claude API plus LangGraph, which is what the au
 
 *Pairs with [Chapter 01 — Mental models](./01_mental_models.md).*
 
-Work through Anthropic's "build a tool-using agent" tutorial as five separate scripts, in order: one tool and one manual round trip; the `while stop_reason == "tool_use"` loop; multiple tools with parallel calls and all results in one user message; error handling with `is_error: true`; the SDK tool runner. [Chapter 03](./03_the_loop.md) is the commentary. Run them on a current model, without `temperature`, and note every place the tutorial's code has drifted from the current API.
+Work through [Anthropic's "build a tool-using agent" tutorial](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) as five separate scripts, in order: one tool and one manual round trip; the `while stop_reason == "tool_use"` loop; multiple tools with parallel calls and all results in one user message; error handling with `is_error: true`; the SDK tool runner. [Chapter 03](./03_the_loop.md) is the commentary. Run them on a current model, without `temperature`, and note every place the tutorial's code has drifted from the current API.
 
 **Acceptance.** You can write ring 2 from memory.
 
@@ -81,7 +81,7 @@ Work through Anthropic's "build a tool-using agent" tutorial as five separate sc
 
 *Pairs with [Chapter 04 — Patterns](./04_patterns.md).*
 
-**Goal.** Implement each pattern from [Chapter 04](./04_patterns.md) side by side so you can pattern-match a problem to a structure in seconds.
+**Goal.** Implement each pattern from [Chapter 04](./04_patterns.md) (and [Anthropic's cookbook](https://github.com/anthropics/anthropic-cookbook/tree/main/patterns/agents)) side by side so you can pattern-match a problem to a structure in seconds.
 
 **Spec.** Six files, each under 100 lines: prompt chaining (outline, critique, write, with one retry gate); routing (ticket triage to three handlers); parallel sectioning (subject line, tweet, post, aggregated); parallel voting (three reviewers, merged and ranked); orchestrator-workers (a planner emits an unknown number of subtopics, a worker per subtopic, a synthesizer); evaluator-optimizer (translate, score, loop to a threshold or three iterations). Write a README comparing them.
 
@@ -109,7 +109,7 @@ Work through Anthropic's "build a tool-using agent" tutorial as five separate sc
 
 *Pairs with [Chapter 06 — Evals](./06_evals.md).*
 
-**Goal.** The eval layer this course has been pointing at since Project 5, and the small tool that makes looking at traces frictionless. [Chapter 06](./06_evals.md) is the method.
+**Goal.** The eval layer this course has been pointing at since Project 5, and the small tool that makes looking at traces frictionless. [Chapter 06](./06_evals.md) is the method; [Hamel Husain's evals essay](https://hamel.dev/blog/posts/evals/) is the source.
 
 **Spec, part A: the suite.**
 - An eval set for Project 5 with the 20/10/10/5/5 composition: normal, ambiguous, adversarial, tool-failure, should-ask-approval. Hand-write twenty; generate inputs (never outputs) for the rest; mine your `reports/` and traces for real cases.
@@ -143,7 +143,7 @@ Work through Anthropic's "build a tool-using agent" tutorial as five separate sc
 
 *Pairs with [Chapter 08 — Production](./08_production.md).*
 
-**Goal.** Deploy the Project 7 agent (with memory and its skill) as a Claude Managed Agent, run it on a schedule, and consume its output. Learn what changes when the vendor owns the loop and the sandbox.
+**Goal.** Deploy the Project 7 agent (with memory and its skill) as a [Claude Managed Agent](https://platform.claude.com/docs/en/managed-agents/overview), run it on a schedule, and consume its output. Learn what changes when the vendor owns the loop and the sandbox.
 
 **Spec.**
 - Define the agent and environment as version-controlled YAML applied with the `ant` CLI: model, system prompt, server-side search and fetch tools, `save_report` as a custom tool your client answers, the weekly-briefing skill, an MCP server if you have one.
@@ -164,11 +164,11 @@ Work through Anthropic's "build a tool-using agent" tutorial as five separate sc
 
 *Pairs with [Chapter 09 — Multi-agent](./09_multi_agent.md).*
 
-**Goal.** A small version of Anthropic's research system, built only after Projects 5 and 7 work, with the cost measured honestly.
+**Goal.** A small version of [Anthropic's research system](https://www.anthropic.com/engineering/multi-agent-research-system), built only after Projects 5 and 7 work, with the cost measured honestly.
 
 **Spec.** A lead agent plans, persists the plan to disk *before* fan-out, spawns three to five parallel sub-agents each with one sub-question and a single exit tool (`return_sub_report`), reads the reports, optionally runs a second wave, and synthesizes. Lead on a strong model, workers on a cheaper one. Token usage logged per agent. A cost governor that caps waves and total spend.
 
-**Acceptance.** Works on a breadth-first question ("founders and current CEOs of the top 20 companies in a startup batch"). You have a measured token ratio against Project 5 on the same question. It fails interestingly on a tightly coupled task (refactor a 500-line file for async), and you can explain why from Cognition's argument.
+**Acceptance.** Works on a breadth-first question ("founders and current CEOs of the top 20 companies in a startup batch"). You have a measured token ratio against Project 5 on the same question. It fails interestingly on a tightly coupled task (refactor a 500-line file for async), and you can explain why from [Cognition's argument](https://cognition.ai/blog/dont-build-multi-agents).
 
 **Stretch.** A rainbow deployment: version the lead prompt, route 50/50 by question hash, log the variant on every trace. An LLM-judge comparison of single versus multi-agent on ten questions with cost per win as the critical column; add it to the Project 6 suite.
 
@@ -181,9 +181,9 @@ Work through Anthropic's "build a tool-using agent" tutorial as five separate sc
 
 **Goal.** Build *for* agents. Expose a small domain (the example used throughout this course is a library concierge: search catalog, check availability, place hold, list holds) as an MCP server and use it from three clients.
 
-**Spec.** The official SDK; tools with strict schemas and the analyst-derived operation list from [Chapter 05](./05_tools_and_mcp.md); one resource (the patron's current holds); one prompt template. Streamable HTTP with OAuth per the current spec. `place_hold` is gated: it returns a draft and a separate `confirm_hold` requires approval.
+**Spec.** The official SDK (start from [MCP's *Build a server* guide](https://modelcontextprotocol.io/docs/develop/build-server)); tools with strict schemas and the analyst-derived operation list from [Chapter 05](./05_tools_and_mcp.md); one resource (the patron's current holds); one prompt template. Streamable HTTP with OAuth per the current spec. `place_hold` is gated: it returns a draft and a separate `confirm_hold` requires approval.
 
-**Acceptance.** The same server works from Claude Code, from a Messages API request via the MCP connector, and from your own agent. The MCP Inspector shows every tool. Injection test: a catalog record containing "ignore previous instructions" does not change the agent's behavior. A postmortem on what the protocol made easier and harder than a local tool.
+**Acceptance.** The same server works from Claude Code, from a Messages API request via the MCP connector, and from your own agent. The [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) shows every tool. Injection test: a catalog record containing "ignore previous instructions" does not change the agent's behavior. A postmortem on what the protocol made easier and harder than a local tool.
 
 ## Keeping the finished projects current
 

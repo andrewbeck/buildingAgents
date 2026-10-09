@@ -14,10 +14,10 @@ The single best predictor of whether someone can debug an agent in production is
 
 Read first:
 
-- **Tool use overview** (Claude docs). The substrate: schemas, `tool_use` and `tool_result` blocks, parallel calls, stop reasons.
-- **Building agents with the Claude Agent SDK** (Anthropic, 2025). Gather, act, verify, and why filesystem plus bash is a general tool surface.
+- **[Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)** (Claude docs). The substrate: schemas, `tool_use` and `tool_result` blocks, parallel calls, stop reasons.
+- **[Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)** (Anthropic, 2025). Gather, act, verify, and why filesystem plus bash is a general tool surface.
 
-Read after: **Claude Agent SDK overview** once you commit to it, and **Code Mode** (Cloudflare) when tool count or tool output starts to crowd the window. Both in the [the loop and tools tier](./13_reading_list.md#tier-the-loop-and-tools).
+Read after: **[Claude Agent SDK overview](https://platform.claude.com/docs/en/agent-sdk/overview)** once you commit to it, and **[Code Mode](https://blog.cloudflare.com/code-mode/)** (Cloudflare) when tool count or tool output starts to crowd the window. Both in the [the loop and tools tier](./13_reading_list.md#tier-the-loop-and-tools).
 
 ## The four ideas
 
@@ -261,7 +261,7 @@ One assistant message can contain several `tool_use` blocks. Execute them (concu
 
 ## The same loop with the SDK tool runner
 
-Once you understand the loop, stop hand-writing it. The Anthropic SDK's tool runner drives the request → execute → loop cycle for tools you define, and gives you per-turn hooks for approval gates, logging, and result modification. This is Ring 5.
+Once you understand the loop, stop hand-writing it. The Anthropic SDK's [tool runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner) drives the request → execute → loop cycle for tools you define, and gives you per-turn hooks for approval gates, logging, and result modification. This is Ring 5.
 
 Python:
 
@@ -341,7 +341,7 @@ Several things that used to require hand-rolling are now request parameters. You
 
 ## The rings, as a progression
 
-Anthropic's "build a tool-using agent" tutorial, worked as five separate scripts (Project 0), is the cleanest ladder for the loop:
+[Anthropic's "build a tool-using agent" tutorial](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), worked as five separate scripts (Project 0), is the cleanest ladder for the loop:
 
 1. **One tool, one turn.** A nested JSON-schema tool and a manual `tool_result` round trip.
 2. **The loop.** `while stop_reason == "tool_use"`.

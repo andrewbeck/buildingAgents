@@ -4,23 +4,23 @@
 
 The single most common mistake in this field is building an agent for a problem that does not need one. Agents cost tokens, add latency, behave nondeterministically, and produce long branching traces that are painful to debug. Sometimes that is worth it. Usually it is not. The core principle, stated three ways by three sources that agree:
 
-- Anthropic: find the simplest solution possible, and only increase complexity when needed.
-- OpenAI: start with a capable model, well-defined tools, and clear instructions, and move to multi-agent only when needed.
+- [Anthropic](https://www.anthropic.com/engineering/building-effective-agents): find the simplest solution possible, and only increase complexity when needed.
+- [OpenAI](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf): start with a capable model, well-defined tools, and clear instructions, and move to multi-agent only when needed.
 - One of the drafts this course was consolidated from put it best: **use the least autonomous architecture that reliably completes the job.**
 
 ## Build
 
-No project on the ladder belongs to this chapter. The exercise below is the build: run the decision procedure on ideas of your own before Project 3 commits you to a shape. If you want code, run the Building Effective Agents cookbook patterns listed under Read; they are the rungs of the ladder in about 100 lines each.
+No project on the ladder belongs to this chapter. The exercise below is the build: run the decision procedure on ideas of your own before Project 3 commits you to a shape. If you want code, run the [Building Effective Agents cookbook patterns](https://github.com/anthropics/anthropic-cookbook/tree/main/patterns/agents) listed under Read; they are the rungs of the ladder in about 100 lines each.
 
 ## Read
 
 Read first:
 
-- **Building Effective Agents** and its reference code (Anthropic). Each pattern is about 100 lines. Run them before reading any framework's docs.
-- **Learning the Bitter Lesson** (Lance Martin, 2025). Why hand-built structure becomes a bottleneck, which is the argument for starting low on the ladder.
-- **A Practical Guide to Building Agents** (OpenAI, 2025). The three "when to build" criteria this chapter reconciles with Anthropic's four.
+- **[Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents)** and its [reference code](https://github.com/anthropics/anthropic-cookbook/tree/main/patterns/agents) (Anthropic). Each pattern is about 100 lines. Run them before reading any framework's docs.
+- **[Learning the Bitter Lesson](https://rlancemartin.github.io/2025/07/30/bitter_lesson/)** (Lance Martin, 2025). Why hand-built structure becomes a bottleneck, which is the argument for starting low on the ladder.
+- **[A Practical Guide to Building Agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)** (OpenAI, 2025). The three "when to build" criteria this chapter reconciles with Anthropic's four.
 
-Read after: **Agent design patterns** (Lance Martin, 2026) and **How to think about agent frameworks** (Harrison Chase), both in the [when to build tier](./13_reading_list.md#tier-when-to-build).
+Read after: **[Agent design patterns](https://rlancemartin.github.io/2026/01/09/agent_design/)** (Lance Martin, 2026) and **[How to think about agent frameworks](https://blog.langchain.com/how-to-think-about-agent-frameworks/)** (Harrison Chase), both in the [when to build tier](./13_reading_list.md#tier-when-to-build).
 
 ## The complexity ladder
 

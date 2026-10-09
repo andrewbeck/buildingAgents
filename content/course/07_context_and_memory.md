@@ -10,15 +10,15 @@
 
 Read first:
 
-- **Effective context engineering for AI agents** (Anthropic, 2025). Attention budget, context rot, and the compaction, note-taking, sub-agent triad.
-- **Context Engineering for Agents** (Lance Martin, 2025). Write, select, compress, isolate; the spec for Project 7 is these four buckets.
-- **Agent Skills overview** and **Skill authoring best practices** (Claude docs). Progressive disclosure in three levels.
+- **[Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)** (Anthropic, 2025). Attention budget, context rot, and the compaction, note-taking, sub-agent triad.
+- **[Context Engineering for Agents](https://rlancemartin.github.io/2025/06/23/context_engineering/)** (Lance Martin, 2025). Write, select, compress, isolate; the spec for Project 7 is these four buckets.
+- **[Agent Skills overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)** and **[Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)** (Claude docs). Progressive disclosure in three levels.
 
-Read after: the Manus lessons when the agent runs past fifty turns, **LangMem conceptual guide** for the four memory types, and **Writing a good CLAUDE.md**. All in the [context and memory tier](./13_reading_list.md#tier-context-and-memory), which also carries the author's notes from this project.
+Read after: the [Manus lessons](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus) when the agent runs past fifty turns, **[LangMem conceptual guide](https://langchain-ai.github.io/langmem/concepts/conceptual_guide/)** for the four memory types, and **[Writing a good CLAUDE.md](https://www.humanlayer.dev/blog/writing-a-good-claude-md)**. All in the [context and memory tier](./13_reading_list.md#tier-context-and-memory), which also carries the author's notes from this project.
 
 ## Context is a finite, degrading resource
 
-Context is every token the model sees on a turn: system prompt, tools, history, tool results, documents, memory. It is finite, and performance degrades before the limit. Lance Martin's four failure modes are the diagnostic vocabulary:
+Context is every token the model sees on a turn: system prompt, tools, history, tool results, documents, memory. It is finite, and performance degrades before the limit. [Lance Martin's four failure modes](https://rlancemartin.github.io/2025/06/23/context_engineering/) are the diagnostic vocabulary:
 
 | Failure | What it looks like |
 |---|---|
@@ -27,7 +27,7 @@ Context is every token the model sees on a turn: system prompt, tools, history, 
 | Confusion | Superfluous context (irrelevant tools, stale notes) shapes the answer |
 | Clash | Parts of the context disagree and the model splits the difference |
 
-Anthropic's definition of good context: the smallest set of high-signal tokens that maximizes the likelihood of the desired outcome. "Prompt engineering" became "context engineering" because with capable models the question moved from "what should I say" to "what configuration of context produces the right behavior."
+[Anthropic's definition](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) of good context: the smallest set of high-signal tokens that maximizes the likelihood of the desired outcome. "Prompt engineering" became "context engineering" because with capable models the question moved from "what should I say" to "what configuration of context produces the right behavior."
 
 ## The four operations
 
@@ -44,7 +44,7 @@ Two diagnostic rules worth memorizing: "we're running out of context" is usually
 
 ## Which memory are you building?
 
-CoALA's four types, mapped to files. This table is the single most useful artifact from Project 7.
+[CoALA](https://arxiv.org/abs/2309.02427)'s four types, mapped to files. This table is the single most useful artifact from Project 7.
 
 | Type | Holds | Project 7 file | Write policy |
 |---|---|---|---|
@@ -75,7 +75,7 @@ The most important finding, from Lance Martin's benchmark: the simple `claude.md
 - Prefer pointers to copies. Give the agent a file path or a query it can run, not the file's contents.
 - Just-in-time over pre-computed. As models improve, the trend is to give the agent lightweight identifiers (paths, links, stored queries) and let it load what it needs. Slower per call, more robust overall, and it enables progressive disclosure.
 
-Mem0's published numbers (a vendor's own benchmark; keep the shape, not the figures) make the tradeoff concrete: naive full-context replay scored highest on a memory benchmark but ate 26K tokens per turn; selective retrieval gave up six accuracy points for ninety percent fewer tokens and ninety-one percent lower p95 latency. Choose per use case, not by default.
+[Mem0's published numbers](https://mem0.ai/blog/state-of-ai-agent-memory-2026) (a vendor's own benchmark; keep the shape, not the figures) make the tradeoff concrete: naive full-context replay scored highest on a memory benchmark but ate 26K tokens per turn; selective retrieval gave up six accuracy points for ninety percent fewer tokens and ninety-one percent lower p95 latency. Choose per use case, not by default.
 
 ## Long-running agents: the event log and the active context
 
@@ -90,13 +90,13 @@ For tasks that run for hours the architecture that has held up is a split:
 └──────────────────────────────┘  crosses └──────────────────────────┘
 ```
 
-Durability lives in the log. Attention lives in the active context. The harness decides what crosses. Anthropic's Managed Agents architecture is exactly this: session (append-only log), harness (the loop), sandbox (the hands), each swappable. Three techniques feed the active context:
+Durability lives in the log. Attention lives in the active context. The harness decides what crosses. [Anthropic's Managed Agents architecture](https://www.anthropic.com/engineering/managed-agents) is exactly this: session (append-only log), harness (the loop), sandbox (the hands), each swappable. Three techniques feed the active context:
 
 - **Compaction.** Summarize the window and restart with the summary. Now available server-side on the Claude API (beta `compact-2026-01-12`); the critical rule is to append `response.content` back every turn so compaction blocks survive. Hierarchical compaction (summaries of summaries) for very long runs.
 - **Structured note-taking.** The agent writes notes to disk outside the window and reads them back. Anthropic's research lead saves its plan to memory before spawning sub-agents because its own context will be truncated. Project 9 persists plans to `plans/` for the same reason.
 - **Sub-agents.** Fresh windows for sub-tasks; only a compressed result returns. [Chapter 09](./09_multi_agent.md).
 
-Anthropic's harness-design post describes the arc: context anxiety was real on earlier models and needed fresh sessions; later models tolerated long contexts and the workaround was removed. Check whether a context refresh is still necessary task by task rather than assuming it.
+[Anthropic's harness-design post](https://www.anthropic.com/engineering/harness-design-long-running-apps) describes the arc: context anxiety was real on earlier models and needed fresh sessions; later models tolerated long contexts and the workaround was removed. Check whether a context refresh is still necessary task by task rather than assuming it.
 
 ## Observational memory
 

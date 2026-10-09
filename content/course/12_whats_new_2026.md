@@ -69,7 +69,7 @@ Stagehand v4 removed Playwright and runs as a browser extension with non-AI loca
 
 ## Vocabulary
 
-"Harness engineering" (Thoughtworks framed it as a specialization of context engineering with guides and sensors). "Managed agents" as a category. "Forked vs. isolated sub-agents." "Agents on a leash" and "human-on-the-loop" from survey work showing most agent use at work is still monitored. Stack Overflow's pulse survey: 59% of developers use agents at work, 37% daily, 63% rarely run them on autopilot, 69% prefer single-agent workflows.
+"[Harness engineering](https://martinfowler.com/articles/harness-engineering.html)" (Thoughtworks framed it as a specialization of context engineering with guides and sensors). "Managed agents" as a category. "Forked vs. isolated sub-agents." "Agents on a leash" and "human-on-the-loop" from survey work showing most agent use at work is still monitored. Stack Overflow's pulse survey: 59% of developers use agents at work, 37% daily, 63% rarely run them on autopilot, 69% prefer single-agent workflows.
 
 ## What did not change
 

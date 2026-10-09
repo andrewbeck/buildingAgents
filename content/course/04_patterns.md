@@ -13,11 +13,11 @@ Every pattern here is a constraint or a composition on the loop from [Chapter 03
 
 Read first:
 
-- **Building Effective Agents** (Anthropic, 2024), re-read. This chapter is a commentary on it.
-- **How We Build Effective Agents** (Barry Zhang, AI Engineer talk, 2025). Twenty-five minutes; what the essay omits.
-- **Workflows and agents** (LangChain docs). The same patterns in LangGraph code.
+- **[Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents)** (Anthropic, 2024), re-read. This chapter is a commentary on it.
+- **[How We Build Effective Agents](https://www.youtube.com/watch?v=D7_ipDqhtwk)** (Barry Zhang, AI Engineer talk, 2025). Twenty-five minutes; what the essay omits.
+- **[Workflows and agents](https://docs.langchain.com/oss/python/langgraph/workflows-agents)** (LangChain docs). The same patterns in LangGraph code.
 
-Read after: **Agent design patterns** (Lance Martin, 2026), in the [patterns tier](./13_reading_list.md#tier-patterns).
+Read after: **[Agent design patterns](https://rlancemartin.github.io/2026/01/09/agent_design/)** (Lance Martin, 2026), in the [patterns tier](./13_reading_list.md#tier-patterns).
 
 ## 0. The augmented LLM
 
@@ -79,7 +79,7 @@ Less a pattern than a family of compositions. [Chapter 09](./09_multi_agent.md) 
 | **Specialist agents as tools** | Main agent calls `code_reviewer_agent` like a tool | Sub-tasks have very different domains | Same as hierarchical |
 | **Debate / peer** | Agents with different roles argue to consensus | Research settings | Rarely the right production shape |
 
-OpenAI's guide boils multi-agent down to two: **manager** (agents as tools, the good default) and **decentralized** (handoffs). Start with manager.
+[OpenAI's guide](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf) boils multi-agent down to two: **manager** (agents as tools, the good default) and **decentralized** (handoffs). Start with manager.
 
 ## Patterns that are really controls
 
@@ -102,7 +102,7 @@ The patterns are vocabulary, not rules. The win is being able to say "this is ro
 - **Reflection at every step.** Add reflection where it changes the trajectory. Remove it where it is ritual.
 - **Memory as a vector dump of everything.** Without retrieval discipline this generates noise. [Chapter 07](./07_context_and_memory.md).
 
-> **Author's note,** on the harness-design post: "agents doing self-eval are often over-confident; separate eval works better." That is the reason evaluator-optimizer exists as a distinct pattern instead of a line in the generator's prompt.
+> **Author's note,** on the [harness-design post](https://www.anthropic.com/engineering/harness-design-long-running-apps): "agents doing self-eval are often over-confident; separate eval works better." That is the reason evaluator-optimizer exists as a distinct pattern instead of a line in the generator's prompt.
 
 ## Eight questions for reading any agent codebase
 

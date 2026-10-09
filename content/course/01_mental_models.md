@@ -4,29 +4,29 @@
 
 ## Build
 
-- [Project 0](./11_projects.md#project-0--the-rings): Anthropic's tool-use tutorial as five scripts. Two hours. You do not need the frames in this chapter to run it, and running it first makes the frames concrete. [Chapter 03](./03_the_loop.md) is the commentary; start it now and finish it there.
+- [Project 0](./11_projects.md#project-0--the-rings): [Anthropic's tool-use tutorial](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) as five scripts. Two hours. You do not need the frames in this chapter to run it, and running it first makes the frames concrete. [Chapter 03](./03_the_loop.md) is the commentary; start it now and finish it there.
 
 ## Read
 
 Read first:
 
-- **Building Effective Agents** (Anthropic, 2024). The vocabulary every other source uses, and the workflow/agent distinction in Frame 1.
-- **Agents** (Simon Willison, 2025). The one-sentence definition this chapter builds on.
-- **LLM Powered Autonomous Agents** (Lilian Weng, 2023). Once, for where the ideas came from.
+- **[Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents)** (Anthropic, 2024). The vocabulary every other source uses, and the workflow/agent distinction in Frame 1.
+- **[Agents](https://simonwillison.net/2025/Sep/18/agents/)** (Simon Willison, 2025). The one-sentence definition this chapter builds on.
+- **[LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/)** (Lilian Weng, 2023). Once, for where the ideas came from.
 
-Read after: CoALA and *Levels of Autonomy for AI Agents* for Frames 2 and 4, and the rest of the [mental models and history tier](./13_reading_list.md#tier-mental-models-and-history). Full citations are in Sources at the end of the chapter.
+Read after: [CoALA](https://arxiv.org/abs/2309.02427) and *[Levels of Autonomy for AI Agents](https://arxiv.org/abs/2506.12469)* for Frames 2 and 4, and the rest of the [mental models and history tier](./13_reading_list.md#tier-mental-models-and-history). Full citations are in Sources at the end of the chapter.
 
 ## Three definitions, in order of usefulness
 
 **Russell and Norvig (1995).** An agent is anything that perceives its environment through sensors and acts on it through actuators. A thermostat qualifies. Their ladder of sophistication (simple reflex → model-based reflex → goal-based → utility-based → learning) is still useful for one reason: most production "AI agents" are model-based reflex agents, a model with tools and a system prompt, and it is healthier to say so than to pretend otherwise.
 
-**Anthropic (December 2024).** From *Building Effective Agents*:
+**Anthropic (December 2024).** From *[Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents)*:
 
 > Workflows are systems where LLMs and tools are orchestrated through predefined code paths. Agents are systems where LLMs dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks.
 
 Both are "agentic systems." The distinction is about who decides the next step: your code (workflow) or the model (agent). Workflows are predictable, cheap, and debuggable. Agents have a higher ceiling and a much larger failure surface. Most things called agents in the wild are workflows, and that is usually correct.
 
-**The working consensus (2025 onward).** Simon Willison's compression is the one to hold in your head:
+**The working consensus (2025 onward).** [Simon Willison's compression](https://simonwillison.net/2025/Sep/18/agents/) is the one to hold in your head:
 
 > An LLM agent runs tools in a loop to achieve a goal.
 
@@ -46,7 +46,7 @@ Already covered above. The gut check: if you can describe the system as "first A
 
 ### Frame 2: Levels of autonomy
 
-From Feng, McDonald, and Zhang, *Levels of Autonomy for AI Agents* (arXiv 2506.12469). The level is a property of the **harness**, not the model. You can run the same model at any level by changing what the human is asked to do.
+From Feng, McDonald, and Zhang, *[Levels of Autonomy for AI Agents](https://arxiv.org/abs/2506.12469)* (arXiv 2506.12469). The level is a property of the **harness**, not the model. You can run the same model at any level by changing what the human is asked to do.
 
 | Level | Human role | Agent role | Example |
 |---|---|---|---|
@@ -106,7 +106,7 @@ When you meet a new architecture, ask three questions: what memory does it have,
 
 **Symbolic agents (1956 to roughly 2020).** Expert systems, BDI (belief-desire-intention) architectures, reinforcement-learning agents, cognitive architectures like SOAR and ACT-R. The durable lesson: specifying intelligence by hand is brittle. Systems worked in narrow domains and failed outside them. CoALA's memory taxonomy is a direct descendant of this era, which is why it feels familiar.
 
-**The LLM moment (2020 to 2022).** GPT-3, then instruction tuning, then ChatGPT gave the field a model that could reason about novel tasks zero-shot. Three papers made tool-using agents a recognized pattern: Chain-of-Thought (Wei et al. 2022) showed reasoning is something models do when asked; ReAct (Yao et al. 2022) interleaved Thought, Action, Observation and made "model plus tools in a loop" concrete; Toolformer (Schick et al. 2023) framed tool use as a first-class model behavior.
+**The LLM moment (2020 to 2022).** GPT-3, then instruction tuning, then ChatGPT gave the field a model that could reason about novel tasks zero-shot. Three papers made tool-using agents a recognized pattern: [Chain-of-Thought](https://arxiv.org/abs/2201.11903) (Wei et al. 2022) showed reasoning is something models do when asked; ReAct (Yao et al. 2022) interleaved Thought, Action, Observation and made "model plus tools in a loop" concrete; Toolformer (Schick et al. 2023) framed tool use as a first-class model behavior.
 
 **The hype cycle (2023).** AutoGPT and BabyAGI ran unbounded loops and mostly spent money. The lesson that took a year to absorb: autonomy without grounding and a stopping condition is useless. The same year produced durable work: Generative Agents, Voyager, Reflexion.
 
@@ -150,7 +150,7 @@ Keep this split in mind when reading [Chapter 10](./10_platforms.md). "Framework
 
 **Single vs. multi-agent.** Multi-agent buys parallelism, specialization, and context isolation. It costs coordination overhead, tokens, and debuggability. Anthropic's research system reported roughly fifteen times the tokens of a chat; the author's Project 9 build measured about four times on a breadth-first research task, for reasons covered in [Chapter 09](./09_multi_agent.md). Default to single-agent.
 
-**Skills.** A folder with a `SKILL.md` (frontmatter plus instructions) and optional scripts and references, loaded only when the task matches the description. Progressive disclosure for capabilities. Now an open spec at agentskills.io.
+**Skills.** A folder with a `SKILL.md` (frontmatter plus instructions) and optional scripts and references, loaded only when the task matches the description. Progressive disclosure for capabilities. Now an [open spec at agentskills.io](https://agentskills.io/specification).
 
 **MCP.** JSON-RPC 2.0 protocol with three server primitives (tools, resources, prompts), two transports (stdio, streamable HTTP), capability negotiation on connect. It is to agent-tool integration what REST is to client-server.
 
