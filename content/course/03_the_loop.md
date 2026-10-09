@@ -4,6 +4,21 @@
 
 The single best predictor of whether someone can debug an agent in production is whether they can write the loop without looking it up. Projects 0, 1, and 2 in [Chapter 11](./11_projects.md) are where you do it. This chapter is the current-API version of that loop, including the parts that are wrong or missing in most tutorial code.
 
+## Build
+
+- [Project 0](./11_projects.md#project-0--the-rings): the tutorial as five scripts, one per ring. Do it before reading past "The four ideas" if you have not already.
+- [Project 1](./11_projects.md#project-1--hello-agent): the manual loop with two tools, no framework. The from-scratch agent in this chapter is the reference implementation.
+- [Project 2](./11_projects.md#project-2--thinking-agent): trace log, token budget, and an effort-level A/B. Exercises 3 to 6 below are the steps that turn Project 1 into Project 2.
+
+## Read
+
+Read first:
+
+- **Tool use overview** (Claude docs). The substrate: schemas, `tool_use` and `tool_result` blocks, parallel calls, stop reasons.
+- **Building agents with the Claude Agent SDK** (Anthropic, 2025). Gather, act, verify, and why filesystem plus bash is a general tool surface.
+
+Read after: **Claude Agent SDK overview** once you commit to it, and **Code Mode** (Cloudflare) when tool count or tool output starts to crowd the window. Both in the [the loop and tools tier](./13_reading_list.md#tier-the-loop-and-tools).
+
 ## The four ideas
 
 ### 1. A tool is three things
@@ -338,17 +353,17 @@ Re-run them with `claude-opus-5` and without `temperature`. That is a twenty-min
 
 ## Exercises
 
-Do at least the first six. They are the actual learning.
+Do at least the first six. They are the actual learning. Each one is tagged with the project it feeds; the untagged ones stand alone.
 
-1. Run the agent. Count the model calls. That is your intuition for agent cost.
-2. Make `web_search` lie ("Anthropic is headquartered on Mars"). Watch what the agent does. Agents are bottlenecked by ground truth from their environment.
-3. Add `read_from_file` and a task that needs it.
-4. Add a programmatic stopping check: after each step, if `result.txt` exists and validates, stop early. Compare with trusting the model.
-5. Replace prints with JSON-lines logging: step, tool, input, output, latency, tokens. That is a trace log, the foundation of observability.
-6. Enforce the token budget from `response.usage` instead of the step count. Then set `output_config.effort` to `low` and `high` and compare tokens and quality.
+1. Run the agent. Count the model calls. That is your intuition for agent cost. *(Project 1)*
+2. Make `web_search` lie ("Anthropic is headquartered on Mars"). Watch what the agent does. Agents are bottlenecked by ground truth from their environment. *(Project 1)*
+3. Add `read_from_file` and a task that needs it. *(Project 2)*
+4. Add a programmatic stopping check: after each step, if `result.txt` exists and validates, stop early. Compare with trusting the model. *(Project 2)*
+5. Replace prints with JSON-lines logging: step, tool, input, output, latency, tokens. That is a trace log, the foundation of observability. *(Project 2)*
+6. Enforce the token budget from `response.usage` instead of the step count. Then set `output_config.effort` to `low` and `high` and compare tokens and quality. *(Project 2)*
 7. Convert to streaming with `client.messages.stream()`.
-8. Add a `before_tool` hook that can veto a call. That is the seed of permissions and human-in-the-loop. Then do the same with the tool runner's per-turn hook and notice how much less code it is.
-9. Make the agent able to call itself as a tool: `delegate(task)` spawns a fresh loop with its own context. Multi-agent in thirty lines.
+8. Add a `before_tool` hook that can veto a call. That is the seed of permissions and human-in-the-loop. Then do the same with the tool runner's per-turn hook and notice how much less code it is. *(Project 3)*
+9. Make the agent able to call itself as a tool: `delegate(task)` spawns a fresh loop with its own context. Multi-agent in thirty lines. *(preview of Project 9)*
 10. Rewrite the loop against the OpenAI Responses API. Same loop, different message shapes. The difference between providers at this layer is thin.
 
 ## Common mistakes

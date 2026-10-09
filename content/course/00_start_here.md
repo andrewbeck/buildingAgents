@@ -33,10 +33,12 @@ There is also a [short path](./QUICKSTART_for_a_friend.md): six weeks, read-this
 **Starting fresh**, at roughly ten hours a week:
 
 1. **Weeks 1 to 2.** Read 01, 02, 03. Build Projects 0, 1, and 2 from [Chapter 11](./11_projects.md). Do the exercises in 03; they are the actual learning.
-2. **Weeks 3 to 4.** Read 04 and 05. Build Project 3 (the five workflow patterns) and Project 4 (a research agent). Document the first way Project 4 fails.
-3. **Weeks 5 to 6.** Read 06 and 07. Build Project 5 (memory and skills). Then stop and build Project 8 part A, a real eval suite for Project 4, before going further. Evals sit in the middle of this course on purpose; deferring them is the most common and most expensive mistake.
-4. **Weeks 7 to 8.** Read 08, 09, 10. Build Project 6 (multi-agent) and measure it against Project 4. Build Project 7 on a managed runtime.
-5. **After that.** Project 9 (an MCP server), then pick one of the ten to operate for ninety days. The maintenance rhythm in 08 is the curriculum after the curriculum.
+2. **Weeks 3 to 4.** Read 04 and 05. Build Project 3 (triage with approval gates), Project 4 (the five workflow patterns), and Project 5 (a research agent). Document the first way Project 5 fails.
+3. **Weeks 5 to 6.** Read 06 and 07. Build Project 6 part A, a real eval suite for Project 5, before going further. Evals sit in the middle of this course on purpose; deferring them is the most common and most expensive mistake. Then build Project 7 (memory and skills).
+4. **Weeks 7 to 8.** Read 08, 09, 10. Build Project 8 on a managed runtime. Build Project 9 (multi-agent) and measure it against Project 5.
+5. **After that.** Project 10 (an MCP server), then pick one of the ten to operate for ninety days. The maintenance rhythm in 08 is the curriculum after the curriculum.
+
+Each chapter opens with a **Build** section naming the projects to do alongside it and a **Read** section naming what to read first, and closes with **Exercises** and a **Checkpoint**. The project numbers ascend with the chapters, so working the chapters in order works the ladder in order.
 
 **As a reference**, each chapter ends with a checkpoint you can test yourself against and a source list you can trust.
 

@@ -1,6 +1,6 @@
 # Annotated reading list
 
-> This is the index for the whole course: every source the other chapters lean on, plus the papers, books, and free courses that earn their time. It was built by merging five earlier reading lists and the author's Project 5 literature review, then filtering hard. Kept: primary docs, papers, vendor engineering blogs, a short list of practitioners who publish evidence (Hamel Husain, Eugene Yan, Simon Willison, Lance Martin, Chip Huyen, Lilian Weng, Karpathy, Maggie Appleton, Geoffrey Litt), and courses that are free. Cut: paid bundles, bootcamps, listicles, vendor comparisons written by competitors, follow lists, and anything whose value is motivation rather than substance. After this chapter you know the nine things to read first, where each chapter's depth lives, and how to spend two hours a week without drowning.
+> This is the index for the whole course: every source the other chapters lean on, plus the papers, books, and free courses that earn their time. It was built by merging five earlier reading lists and the author's Project 7 literature review, then filtering hard. Kept: primary docs, papers, vendor engineering blogs, a short list of practitioners who publish evidence (Hamel Husain, Eugene Yan, Simon Willison, Lance Martin, Chip Huyen, Lilian Weng, Karpathy, Maggie Appleton, Geoffrey Litt), and courses that are free. Cut: paid bundles, bootcamps, listicles, vendor comparisons written by competitors, follow lists, and anything whose value is motivation rather than substance. After this chapter you know the nine things to read first, where each chapter's depth lives, and how to spend two hours a week without drowning.
 
 Every entry gives what it teaches and when to read it. Years are publication years where known.
 
@@ -80,12 +80,12 @@ Feeds [Patterns](./04_patterns.md). The chapter is a commentary on the Building 
 
 ## Tier: context and memory
 
-Feeds [Context and memory](./07_context_and_memory.md). This tier folds in the author's annotations from building Project 5, lightly edited and marked "Author's note."
+Feeds [Context and memory](./07_context_and_memory.md). This tier folds in the author's annotations from building Project 7, lightly edited and marked "Author's note."
 
 - **Effective context engineering for AI agents** (Anthropic, 2025). https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
   Teaches: context as an attention budget, context rot, and the compaction / structured note-taking / sub-agent triad. Author's note: the source for the "attention budget" and "context rot" vocabulary; the triad maps directly onto compress, write, and isolate. Re-read before any project where the context starts to bloat.
 - **Context Engineering for Agents** (Lance Martin, 2025). https://rlancemartin.github.io/2025/06/23/context_engineering/ and the talk: https://www.youtube.com/watch?v=_IlTcWciEC4
-  Teaches: write, select, compress, isolate, framed as an OS managing RAM. Author's note: the cleanest organizing metaphor for the space; Project 5's spec is literally these four buckets. His observation that Claude Code's flat CLAUDE.md plus filesystem beats semantic chunking and knowledge graphs on coding tasks is the strongest argument for the simple thing. Re-read before designing memory or sub-agent topologies. The talk covers the same claims as several popular videos on the topic, with evidence.
+  Teaches: write, select, compress, isolate, framed as an OS managing RAM. Author's note: the cleanest organizing metaphor for the space; Project 7's spec is literally these four buckets. His observation that Claude Code's flat CLAUDE.md plus filesystem beats semantic chunking and knowledge graphs on coding tasks is the strongest argument for the simple thing. Re-read before designing memory or sub-agent topologies. The talk covers the same claims as several popular videos on the topic, with evidence.
 - **Context Engineering for AI Agents: Lessons from Building Manus** (Manus, 2025). https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus and Lance Martin's reading: https://rlancemartin.github.io/2025/10/15/manus/
   Teaches: KV-cache hit rate as the production metric, mask tools instead of removing them, filesystem as unlimited context, recitation via a todo file, keep failures in context. Read when: your agent runs past fifty turns.
 - **Agent Skills overview** and **Skill authoring best practices** (Claude docs). https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview and https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
@@ -176,7 +176,7 @@ Feeds [Multi-agent](./09_multi_agent.md).
 - **Benchmarking Multi-Agent Architectures** (LangChain, 2025). https://blog.langchain.com/benchmarking-multi-agent-architectures/
   Teaches: measured numbers for supervisor versus swarm versus single agent. Read when: choosing a topology and you want data instead of opinions.
 - **Open Deep Research** (LangChain, 2025). https://blog.langchain.com/open-deep-research/
-  Teaches: an open orchestrator-worker research agent with the design choices explained. Read when: comparing against your own Project 6.
+  Teaches: an open orchestrator-worker research agent with the design choices explained. Read when: comparing against your own Project 9.
 - **Introducing Ambient Agents** (LangChain, 2025). https://blog.langchain.com/introducing-ambient-agents/
   Teaches: agents triggered by events instead of chat, with human-in-the-loop as the core primitive. Read when: building anything that runs unattended.
 - **Harness design for long-running application development** (Anthropic, 2026-03). https://www.anthropic.com/engineering/harness-design-long-running-apps
@@ -214,7 +214,7 @@ Read abstract, intro, figures, conclusion. Decide whether to go deeper afterward
 | Tree of Thoughts (Yao et al., 2023) | https://arxiv.org/abs/2305.10601 | Search over partial solutions, when you can score partial states. |
 | Voyager (Wang et al., 2023) | https://arxiv.org/abs/2305.16291 | A skill library that grows over time, indexed by description. Skills by another name. |
 | WebArena (Zhou et al., 2023) | https://arxiv.org/abs/2307.13854 | Realistic web tasks are much harder than demos. |
-| CoALA (Sumers et al., 2023) | https://arxiv.org/abs/2309.02427 | Working, episodic, semantic, procedural memory; the decision cycle. Project 5's vocabulary. |
+| CoALA (Sumers et al., 2023) | https://arxiv.org/abs/2309.02427 | Working, episodic, semantic, procedural memory; the decision cycle. Project 7's vocabulary. |
 | SWE-bench (Jimenez et al., 2023) | https://arxiv.org/abs/2310.06770 | How coding tasks and grading were constructed. |
 | MemGPT (Packer et al., 2023) | https://arxiv.org/abs/2310.08560 | The OS-paging metaphor: main context versus external storage, model-managed. Look at the architecture diagram. |
 | SWE-agent (Yang et al., 2024) | https://arxiv.org/abs/2405.15793 | The agent-computer interface as a design variable. |
@@ -247,7 +247,7 @@ Only free material. The paid equivalents were checked and offer the same content
 - **Hugging Face Agents Course** (free). https://huggingface.co/learn/agents-course
   Teaches: fundamentals, smolagents (code-as-action), LlamaIndex, LangGraph, with a final eval. Read when: you want the code-agent paradigm contrasted with JSON tool calling. Unit 1 and the smolagents unit.
 - **DeepLearning.AI short courses** (free). AI Agents in LangGraph: https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/ · Long-Term Agentic Memory with LangGraph: https://www.deeplearning.ai/short-courses/long-term-agentic-memory-with-langgraph/ · Building Code Agents with smolagents: https://www.deeplearning.ai/short-courses/building-code-agents-with-hugging-face-smolagents/ · Claude Code: https://www.deeplearning.ai/short-courses/claude-code-a-highly-agentic-coding-assistant/ · Agentic AI (Ng): https://learn.deeplearning.ai/courses/agentic-ai/
-  One to two hours each, code included. Read when: you want a guided build of something you have read about. The memory course pairs with Project 5.
+  One to two hours each, code included. Read when: you want a guided build of something you have read about. The memory course pairs with Project 7.
 - **Anthropic Academy** (free). https://anthropic.skilljar.com
   Teaches: Claude API, MCP intro and advanced, Claude Code skills. Read when: you want the vendor's walkthrough before the docs.
 - **AI Engineer conference channel**. https://www.youtube.com/@aidotengineer
@@ -309,4 +309,4 @@ A new source earns a row when it is primary (docs, a paper, a vendor's own engin
 
 ## Sources
 
-This chapter is its own source list. Filtering decisions were made against five earlier generated reading lists and the author's annotated literature review from Project 5. Every URL above was fetched and returned a live page on 2026-09-09, except the O'Reilly book page, which blocks automated requests.
+This chapter is its own source list. Filtering decisions were made against five earlier generated reading lists and the author's annotated literature review from Project 7. Every URL above was fetched and returned a live page on 2026-09-09, except the O'Reilly book page, which blocks automated requests.

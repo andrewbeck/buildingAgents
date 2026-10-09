@@ -1,8 +1,23 @@
 # 04 — Patterns
 
-> The pattern vocabulary from *Building Effective Agents*, with what each one fixes, what it leaves to the model, when it is the wrong choice, and where the workflow/agent boundary shows up in Project 3. After this chapter you can factor any agent design into named pieces and say which piece is the workflow and which piece is the agent.
+> The pattern vocabulary from *Building Effective Agents*, with what each one fixes, what it leaves to the model, when it is the wrong choice, and where the workflow/agent boundary shows up in Project 4. After this chapter you can factor any agent design into named pieces and say which piece is the workflow and which piece is the agent.
 
 Every pattern here is a constraint or a composition on the loop from [Chapter 03](./03_the_loop.md). Prompt chaining is the loop with no model decisions. Routing is the loop with one tool that picks a branch. Orchestrator-workers is the loop where one tool spawns sub-loops. Keep that in mind and the catalog stops feeling like a list to memorize.
+
+## Build
+
+- [Project 3](./11_projects.md#project-3--thinking-in-graphs): triage with two approval gates. Routing into a chain, with the human in the loop, in a graph where the model never picks the next node.
+- [Project 4](./11_projects.md#project-4--the-five-workflow-patterns): the five workflows plus evaluator-optimizer, six files under 100 lines each. The checkpoint at the end of this chapter assumes you have them.
+
+## Read
+
+Read first:
+
+- **Building Effective Agents** (Anthropic, 2024), re-read. This chapter is a commentary on it.
+- **How We Build Effective Agents** (Barry Zhang, AI Engineer talk, 2025). Twenty-five minutes; what the essay omits.
+- **Workflows and agents** (LangChain docs). The same patterns in LangGraph code.
+
+Read after: **Agent design patterns** (Lance Martin, 2026), in the [patterns tier](./13_reading_list.md#tier-patterns).
 
 ## 0. The augmented LLM
 
@@ -21,7 +36,7 @@ Failure modes: tool misuse, context bloat, over-trusting retrieved content, no s
 | **Orchestrator-workers** | Planner → N (data-dependent) workers → synthesizer | The stages | The number and content of workers | The shape of the work is unknown until you look at the input | Sub-tasks are not independent, or every worker has the same prompt |
 | **Evaluator-optimizer** | Producer ↔ critic loop, bounded | Loop budget, threshold | Iteration count | Quality is cheaply judgeable and the first draft is rarely good enough | Evaluation is subjective with no anchor, or one shot reaches the bar |
 
-This decision flow, from the author's Project 3 write-up, is the fastest way to pick:
+This decision flow, from the author's Project 4 write-up, is the fastest way to pick:
 
 ```
 Is the work data-dependent (planner can't know N up front)?
@@ -40,11 +55,11 @@ Implementation notes that matter:
 
 - **Chaining.** One job per call. If a step does two things, split it. Add a gate only where intermediate quality matters.
 - **Routing.** The router is small and fast. Do not use Opus to decide which Opus prompt to use. Its output is a constrained enum via structured outputs, never free text. Always have a fallback path.
-- **Parallel.** Cost grows linearly with branches. Sectioning buys throughput and focus; voting buys quality on tasks with a true answer. Project 3's sectioning and voting files have the same graph shape; the difference is intent.
+- **Parallel.** Cost grows linearly with branches. Sectioning buys throughput and focus; voting buys quality on tasks with a true answer. Project 4's sectioning and voting files have the same graph shape; the difference is intent.
 - **Orchestrator-workers.** This is the workflow-to-agent boundary. The orchestrator decides at run time how many workers and what each does. Sub-agent context isolation is the entire point; if workers share context you added cost without benefit. Synthesis is the hard part, so have workers return structured output. The orchestrator needs an explicit "enough" rule or it spawns too many or too few.
 - **Evaluator-optimizer.** The evaluator does the harder job; spend more on its prompt. Cap iterations, loops oscillate between near-equivalent drafts. Evaluator and generator can be the same model with different prompts.
 
-In every one of these the model chooses *what to write* but never *what node runs next*, except through a branch set you defined. That line is what Project 4 crosses.
+In every one of these the model chooses *what to write* but never *what node runs next*, except through a branch set you defined. That line is what Project 5 crosses.
 
 ## 6. The autonomous agent
 
@@ -58,7 +73,7 @@ Less a pattern than a family of compositions. [Chapter 09](./09_multi_agent.md) 
 
 | Shape | What it is | When | Failure mode |
 |---|---|---|---|
-| **Hierarchical (manager, agents as tools)** | Orchestrator-workers where each worker is a full agent. Anthropic's research system. Project 6. | Breadth-first parallel work, isolated context per branch | Planner over-decomposes; workers lack context; aggregator hides disagreement |
+| **Hierarchical (manager, agents as tools)** | Orchestrator-workers where each worker is a full agent. Anthropic's research system. Project 9. | Breadth-first parallel work, isolated context per branch | Planner over-decomposes; workers lack context; aggregator hides disagreement |
 | **Handoffs (decentralized)** | Agent A hands the conversation to B, which now owns it | Ownership truly moves between domains (triage → refunds) | Lost context, confusing UX, handoff loops |
 | **Pipeline of agents** | Researcher → writer → editor, each an agent | Each role genuinely needs autonomy, not just a prompt | Usually a prompt chain in disguise |
 | **Specialist agents as tools** | Main agent calls `code_reviewer_agent` like a tool | Sub-tasks have very different domains | Same as hierarchical |
@@ -72,11 +87,11 @@ Three more shapes show up in every serious system. They are not orchestration pa
 
 - **Human-in-the-loop approval.** Agent proposes → policy gate → human approves, rejects, or edits → agent continues. Use for sends, deletes, purchases, deploys, external comms, regulated decisions. [Chapter 08](./08_production.md) has the four HITL patterns.
 - **Sandbox execution.** Agent → isolated environment with limited network, scoped credentials, disposable state, audit log → result. Use for generated code, shell, file edits, browser automation, untrusted documents.
-- **Retrieval plus verification.** Retrieve → extract claims → verify each claim against its source → answer with citations. Use for anything where truth matters. Failure modes: retrieval misses the key source, the source is stale, the model cites a source that does not support the claim. Project 4's `save_report` citation enforcement is this pattern.
+- **Retrieval plus verification.** Retrieve → extract claims → verify each claim against its source → answer with citations. Use for anything where truth matters. Failure modes: retrieval misses the key source, the source is stale, the model cites a source that does not support the claim. Project 5's `save_report` citation enforcement is this pattern.
 
 ## How patterns compose
 
-Real systems are compositions. A workflow that ends in an agent for the open-ended last step. An orchestrator whose workers are prompt chains. A router that dispatches to one of several agents. An evaluator-optimizer wrapped around an agent to enforce a quality bar. Project 2.5 is routing into a chain with two approval gates.
+Real systems are compositions. A workflow that ends in an agent for the open-ended last step. An orchestrator whose workers are prompt chains. A router that dispatches to one of several agents. An evaluator-optimizer wrapped around an agent to enforce a quality bar. Project 3 is routing into a chain with two approval gates.
 
 The patterns are vocabulary, not rules. The win is being able to say "this is routing into a chain into an evaluator loop" and have everyone in the room see the same diagram.
 
@@ -102,11 +117,17 @@ The patterns are vocabulary, not rules. The win is being able to say "this is ro
 
 If you can answer these for a system, you understand it well enough to build, modify, or replace it.
 
+## Exercises
+
+1. Take one of your six Project 4 files and rewrite it as a different pattern. Record what got worse.
+2. Add a fourth handler to Project 3's router without touching the routing prompt. If you cannot, say what the prompt is doing that the graph should.
+3. Draw the composition for a product-teardown agent in pattern vocabulary, then mark the one node where the model decides what runs next.
+
 ## Checkpoint
 
-- Open any of your six Project 3 files and name the pattern, what is fixed, and what is dynamic without reading the README.
+- Open any of your six Project 4 files and name the pattern, what is fixed, and what is dynamic without reading the README.
 - Sketch the composition for a product-teardown agent in pattern vocabulary.
-- Explain why orchestrator-workers sits on the workflow/agent boundary and what makes Project 4 an agent.
+- Explain why orchestrator-workers sits on the workflow/agent boundary and what makes Project 5 an agent.
 - Run the eight questions on an open-source agent repo you have not seen before.
 
 ## Sources

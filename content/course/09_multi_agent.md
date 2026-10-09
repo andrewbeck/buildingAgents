@@ -1,6 +1,20 @@
 # 09 — Multi-Agent and Long-Running Agents
 
-> When more than one loop is worth its cost, how to structure the coordination, and what a harness needs when a single task runs for hours. Built on Anthropic's research-system post, Cognition's counterargument, and one measured Project 6 build. After this chapter you can refuse a multi-agent design for the right reasons and build one for the right reasons.
+> When more than one loop is worth its cost, how to structure the coordination, and what a harness needs when a single task runs for hours. Built on Anthropic's research-system post, Cognition's counterargument, and one measured Project 9 build. After this chapter you can refuse a multi-agent design for the right reasons and build one for the right reasons.
+
+## Build
+
+- [Project 9](./11_projects.md#project-9--multi-agent-research): lead plus parallel sub-agents with a cost governor, built only after Projects 5 and 7 work. The acceptance criterion is a measured token ratio against Project 5 on the same question, and an interesting failure on a tightly coupled task. Extend the Project 6 suite with a blinded cost-per-win comparison.
+
+## Read
+
+Read first:
+
+- **How we built our multi-agent research system** (Anthropic, 2025). The shape Project 9 copies, and the fifteen-times-the-tokens number.
+- **Don't Build Multi-Agents** (Cognition, 2025). Immediately after. Parallelize read-only work, serialize writes.
+- **Effective harnesses for long-running agents** (Anthropic, 2025). The harness, not the model, owns durability.
+
+Read after: **Benchmarking Multi-Agent Architectures** (LangChain) for numbers, **Open Deep Research** to compare against your own build, and **Harness design for long-running application development**. All in the [multi-agent and long-running tier](./13_reading_list.md#tier-multi-agent-and-long-running).
 
 ## The default is one agent
 
@@ -22,9 +36,9 @@ Anthropic's research system: multi-agent beat single-agent Opus by a wide margin
 
 Good fit: breadth-first tasks with parallelizable sub-tasks (research, broad data gathering, multi-file surveys). Bad fit: tightly coupled tasks where context must be shared, which is most coding. Cognition's *Don't Build Multi-Agents* is the canonical statement of the failure: sub-agents make conflicting decisions because neither sees the other's context, and reconciliation costs more than the parallelism saved.
 
-## One measured example: Project 6
+## One measured example: Project 9
 
-The author's Project 6 build, single agent vs. lead-plus-sub-agents on the same breadth-first question (founders and current CEOs of a twenty-company startup batch):
+The author's Project 9 build, single agent vs. lead-plus-sub-agents on the same breadth-first question (founders and current CEOs of a twenty-company startup batch):
 
 | | Tokens |
 |---|---|
@@ -34,7 +48,7 @@ The author's Project 6 build, single agent vs. lead-plus-sub-agents on the same 
 
 Not the textbook fifteen times. Two honest reasons: sub-agents ran on a cheaper, terser model with tight budgets, and the lead capped waves at two. Both are design choices any real system would make. The point to carry forward: the multiplier is a function of your budgets, not a law. Measure it.
 
-Other things Project 6 taught that the papers do not:
+Other things Project 9 taught that the papers do not:
 
 - **Wave 3 is almost never worth it.** Token cost rises super-linearly past two waves and you get a more verbose answer, not a better one.
 - **Rate limits, not token price, are the constraint** on cheap providers. Multi-agent means many small requests.
@@ -53,7 +67,7 @@ From the research-system post:
 - **Parallelize twice.** Spawn workers in parallel and have each worker call tools in parallel.
 - **Heuristics over rigid rules**, with explicit guardrails to stop spin-outs.
 - **Structured hand-offs.** Workers return structured output, not prose. Free text does not scale through a synthesizer. Sub-agents can write large artifacts (files, reports) directly to a filesystem to avoid the game of telephone through the lead.
-- **Lead on the stronger model, workers on the cheaper one.** Project 6 does this. On the Claude API today that is Opus 5 lead, Sonnet 5 or Haiku 4.5 workers; on Managed Agents it is a multiagent roster entry.
+- **Lead on the stronger model, workers on the cheaper one.** Project 9 does this. On the Claude API today that is Opus 5 lead, Sonnet 5 or Haiku 4.5 workers; on Managed Agents it is a multiagent roster entry.
 
 **Forked vs. isolated sub-agents.** A distinction that firmed up this year: a *forked* sub-agent inherits the parent's context (cache-friendly, good for "continue this line of work in parallel"); an *isolated* sub-agent starts clean (right for verifiers and for breadth-first branches that would be polluted by the parent's assumptions). Claude Code's fork mode and the LangChain multi-agent harness post both make this explicit. Pick per branch.
 
@@ -79,15 +93,22 @@ The event-log / active-context split from [Chapter 07](./07_context_and_memory.m
 
 ## When to reach for Managed Agents instead
 
-If the reason you want multi-agent is context isolation or parallel breadth, and the reason you want a harness is hours-long durability, a managed runtime gives you both without operating the loop. You describe the agent (prompt, tools, MCP servers, skills), the vendor runs sessions with a container and a durable log, and you consume an event stream. Project 7 in [Chapter 11](./11_projects.md) is the build. The tradeoff is control and lock-in; the win is not writing the harness.
+If the reason you want multi-agent is context isolation or parallel breadth, and the reason you want a harness is hours-long durability, a managed runtime gives you both without operating the loop. You describe the agent (prompt, tools, MCP servers, skills), the vendor runs sessions with a container and a durable log, and you consume an event stream. Project 8 in [Chapter 11](./11_projects.md) is the build. The tradeoff is control and lock-in; the win is not writing the harness.
+
+## Exercises
+
+1. Run Project 9 and Project 5 on the same breadth-first question and record tokens, wall-clock, and the judge's verdict. That is your first row of the cost-per-win table.
+2. Give Project 9 the tightly coupled task from its spec and write down, from the trace, where the sub-agents' implicit decisions conflicted.
+3. Cap waves at one, then three. Report what the third wave bought.
+4. Write the one-page postmortem naming the failure mode you found.
 
 ## Checkpoint
 
 - For a product-teardown agent, decide single or multi-agent using the five justifications, and write the sentence.
-- Explain why the Project 6 example measured 4x rather than 15x and which knob would move it.
-- Name the three components in Anthropic's brain/hands/log split and what each of your Project 6 files corresponds to.
-- Say which sub-agents in Project 6 should be forked and which isolated.
-- List what you would delete from Project 6's harness if the lead model got materially better tomorrow.
+- Explain why the Project 9 example measured 4x rather than 15x and which knob would move it.
+- Name the three components in Anthropic's brain/hands/log split and what each of your Project 9 files corresponds to.
+- Say which sub-agents in Project 9 should be forked and which isolated.
+- List what you would delete from Project 9's harness if the lead model got materially better tomorrow.
 
 ## Sources
 

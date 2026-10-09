@@ -30,7 +30,7 @@ New since April, in rough order of usefulness:
 
 ## Claude Agent SDK and Claude Code
 
-Near-daily releases. The changes that affect how you would build Project 7 or 8 on the SDK:
+Near-daily releases. The changes that affect how you would build Project 6 or 8 on the SDK:
 
 - Sessions: `startup()` pre-warm, session stores with S3/Redis/Postgres adapters, `resume` with safe truncation, cross-session messaging.
 - Permissions: `"auto"` mode (now the default on paid plans since August 14), `"defer"` decisions that pause headless runs, `permissionPrompts: 'none'` for unattended hosts, `Tool(param:value)` rules, `--restricted`.

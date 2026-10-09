@@ -4,6 +4,21 @@
 
 Anthropic's phrase for this is the **agent-computer interface (ACI)**. The framing: spend as much care on it as you would on a human-computer interface, and write for it the way you would onboard a junior developer.
 
+## Build
+
+- [Project 5](./11_projects.md#project-5--research-agent): a research agent with citations and budgets. The first project where tool descriptions, gating, and per-tool budgets decide whether it works. Write the analyst's operation list from this chapter before writing a tool.
+- Also write three tool-eval cases for Project 5's search tool; they seed the suite in Project 6. The MCP server, [Project 10](./11_projects.md#project-10--a-custom-mcp-server), waits until Chapter 10.
+
+## Read
+
+Read first:
+
+- **Writing tools for agents** (Anthropic, 2025). Tool count and overlap degrade performance; consolidate, namespace, return semantic identifiers, cap output.
+- **Tool use overview** (Claude docs), the strict-schema and parallel-call sections.
+- **Introducing the Model Context Protocol** (Anthropic, 2024). Ten minutes; the N-by-M argument.
+
+Read after: the **MCP specification** before building or trusting any server, and **Code Mode** (Cloudflare). See the [the loop and tools tier](./13_reading_list.md#tier-the-loop-and-tools) and the [platforms and MCP tier](./13_reading_list.md#tier-platforms-and-mcp).
+
 ## Think like an analyst
 
 The Mastra book's tool-design story is the right starting frame. An investor tried dumping her whole library of books into the context window and the agent could not reason about it. She then wrote out the operations a human analyst would run (books by genre, recommendations by investor, sort recommenders by type) and made each one a tool. The agent became useful immediately.
@@ -84,7 +99,7 @@ Client tools are the majority of what you write. Know the other kinds.
 
 | Kind | Who runs it | Examples |
 |---|---|---|
-| Client tool | Your code | Everything in Projects 1 through 6 |
+| Client tool | Your code | Everything in Projects 1 through 9 except the managed deployment in Project 8 |
 | Anthropic-defined, client-executed | Your code, Anthropic's schema | `bash`, text editor, computer use (self-hosted), memory |
 | Server tool | Anthropic | `web_search`, `web_fetch`, `code_execution`, tool search |
 | MCP tool | An MCP server, via your client or the API's MCP connector | Anything with an MCP server |
@@ -98,7 +113,7 @@ Two features that change tool-surface design:
 
 ## Evaluating tools
 
-Tool evals are their own layer under agent evals. For each tool, cases that check: called when it should be, not called when it should not, correct arguments, correct handling of an error result, and the number of unnecessary calls. The Project 4 failure described in [Chapter 11](./11_projects.md) (five search calls re-querying variations before a single fetch) is a tool-selection eval waiting to be written. The fix, budgeting fetches *and* total calls separately, is a description change, which is where most tool fixes live. Anthropic's cookbook has a tool-evaluation notebook worth running once.
+Tool evals are their own layer under agent evals. For each tool, cases that check: called when it should be, not called when it should not, correct arguments, correct handling of an error result, and the number of unnecessary calls. The Project 5 failure described in [Chapter 11](./11_projects.md) (five search calls re-querying variations before a single fetch) is a tool-selection eval waiting to be written. The fix, budgeting fetches *and* total calls separately, is a description change, which is where most tool fixes live. Anthropic's cookbook has a tool-evaluation notebook worth running once.
 
 ## MCP
 
@@ -116,13 +131,20 @@ The Model Context Protocol is an open, JSON-RPC 2.0 standard for connecting LLM 
 
 **Skills vs. MCP.** Both are progressive disclosure. A skill is a folder of instructions and scripts the model reads when a task matches; it changes what the model *knows how to do*. An MCP server is a process the model *calls*; it changes what the model *can reach*. Skills are the right answer for "how we format the weekly briefing." MCP is the right answer for "read our Linear tickets."
 
+## Exercises
+
+1. Write the analyst's operation list for Project 5, then cut it to the tools a first eval set demands. Keep both lists.
+2. Set a per-tool budget in Project 5 (searches and fetches separately) and compare traces against a single total budget.
+3. Rewrite one Project 5 tool description three ways and run the same question against each. Most tool fixes are description fixes; measure it.
+4. Write the three tool-eval cases: called when it should be, not called when it should not, correct arguments.
+
 ## Checkpoint
 
 - Take the library-concierge example and write the analyst's operation list, then cut it to the tools a first eval set demands.
 - Rewrite `send_email` as a gated pair and say which autonomy level each version implies.
 - Explain programmatic tool calling and tool search to a colleague and name a case for each.
 - Say when you would ship an MCP server and when a local function is enough.
-- Write three tool-eval cases for Project 4's search tool that would have caught the over-search failure.
+- Write three tool-eval cases for Project 5's search tool that would have caught the over-search failure.
 
 ## Sources
 

@@ -4,6 +4,21 @@
 
 The rule that organizes the chapter: **if you can't point to the artifact, you haven't done the check.**
 
+## Build
+
+- [Project 8](./11_projects.md#project-8--ship-it-on-managed-agents): deploy the Project 7 agent on Managed Agents, on a schedule, with a budget, a vault, and confirmation round trips. The shipping checklist in this chapter is the acceptance test; the postmortem names what the managed runtime did better and what it hid.
+- Also fill in the shipping checklist and the graduation rubric for Project 5. The rows you cannot fill are the work.
+
+## Read
+
+Read first:
+
+- **The Lethal Trifecta** (Simon Willison, 2025). Private data plus untrusted content plus an exfiltration path is an exploit.
+- **How we contain Claude across products** (Anthropic, 2026). Boundaries enforced, not prompted.
+- **Prompt injection defenses** (Anthropic). What model-side defenses do not cover.
+
+Read after: CaMeL, the **OWASP Top 10 for LLM Applications**, and **Prompt caching** when cost is dominated by re-sent prefixes. All in the [production and security tier](./13_reading_list.md#tier-production-and-security); Managed Agents docs are in the [platforms and MCP tier](./13_reading_list.md#tier-platforms-and-mcp).
+
 ## The shipping checklist
 
 | Category | Check | Artifact |
@@ -84,7 +99,7 @@ Ranked by what usually moves the bill, from Anthropic's cost guidance:
 6. **Batch API** at half price for anything not latency-sensitive.
 7. **Model routing** last, after measuring. Judge cost per completed task, not per request; a cheaper request that needs more turns is not cheaper.
 
-A Project 6 lesson belongs here: cheap-on-paper providers often have request-rate limits separate from token pricing, and multi-agent systems make many small requests.
+A Project 9 lesson belongs here: cheap-on-paper providers often have request-rate limits separate from token pricing, and multi-agent systems make many small requests.
 
 ## Sandboxing
 
@@ -145,13 +160,20 @@ Launch in stages regardless of score: local mock → internal users → drafts o
 
 Have a plan, before you need it, for: disable the agent, revoke credentials, pause a specific tool, replay traces, identify affected data and actions, notify stakeholders, add a regression eval, patch the tool or prompt or workflow.
 
+## Exercises
+
+1. Fill in the shipping checklist for Project 5 with real artifacts. List the rows you cannot fill and what each would take.
+2. Write the per-run and per-step log schema from this chapter into Project 5's tracer, then confirm Project 8's event stream carries the same fields.
+3. Name the three legs of the lethal trifecta in Project 5 and remove one. Rerun the Project 6 suite to see what it cost.
+4. Score Project 5 on the graduation rubric honestly, then write the one change that would move it the most.
+
 ## Checkpoint
 
-- Fill in the shipping checklist for Project 4 with real artifacts, and list the rows you cannot fill.
-- Name the three legs of the lethal trifecta in Project 6 and which one you would remove first.
-- Write the per-run and per-step log schema into Project 4's tracer.
-- Score Project 6 on the graduation rubric honestly.
-- Say which HITL pattern Project 2.5 implements, and which one "the agent emails me" would be.
+- Fill in the shipping checklist for Project 5 with real artifacts, and list the rows you cannot fill.
+- Name the three legs of the lethal trifecta in Project 9 and which one you would remove first.
+- Write the per-run and per-step log schema into Project 5's tracer.
+- Score Project 9 on the graduation rubric honestly.
+- Say which HITL pattern Project 3 implements, and which one "the agent emails me" would be.
 
 ## Sources
 

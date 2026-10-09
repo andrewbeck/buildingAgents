@@ -4,6 +4,21 @@
 
 Read every framework against the twelve things a framework can add (from [Chapter 03](./03_the_loop.md)): streaming, concurrency, hooks, state persistence, tracing, memory abstractions, sub-agents, skills or tool-on-demand, retries, type safety, multi-provider routing, built-in tools. Most projects need two or three. Choosing the framework that gives you those without the other nine is the actual decision.
 
+## Build
+
+- [Project 10](./11_projects.md#project-10--a-custom-mcp-server): a custom MCP server for a small domain, used from three clients. Building *for* agents is the last rung, and the tool-design rules from Chapter 05 are the spec.
+- Also write the one sentence justifying the stack you chose for Project 8, now that you have built on both sides of the harness/deployment split.
+
+## Read
+
+Read first:
+
+- **MCP specification** (2025-11-25 revision). One hour, before building or trusting any server.
+- **Scaling Managed Agents: Decoupling the brain from the hands** (Anthropic, 2026). Session, harness, sandbox, and why harness assumptions go stale.
+- **How to think about agent frameworks** (Harrison Chase, 2025). What a framework provides versus what is just abstraction.
+
+Read after: the **MCP Inspector** and registry while building the server, and the LangGraph, Vercel AI SDK, and Cloudflare Agents docs as you need them. All in the [platforms and MCP tier](./13_reading_list.md#tier-platforms-and-mcp).
+
 ## The two questions
 
 Every option answers two independent questions. Comparisons that ignore this compare apples to warehouses.
@@ -96,14 +111,21 @@ For your own harness: E2B, Modal, Daytona, Vercel Sandbox, Cloudflare Sandboxes.
 | OpenAI-first stack | OpenAI Agents SDK |
 | Typed, testable Python agent | Pydantic AI |
 
-Pick a primary by Project 3 and do not switch until Project 8. Each switch adds thirty to fifty percent to that project's timeline. This course uses LangGraph as the primary and the Claude Agent SDK as the second; both remain sound choices.
+Pick a primary by Project 4 and do not switch until Project 6. Each switch adds thirty to fifty percent to that project's timeline. This course uses LangGraph as the primary and the Claude Agent SDK as the second; both remain sound choices.
+
+## Exercises
+
+1. For each of Projects 4, 5, 7, and 9, list which of the twelve framework additions you used. Count how many you would miss if the framework vanished.
+2. Build the Project 10 server and run the MCP Inspector against it before any model sees it.
+3. Plant "ignore previous instructions" in one catalog record and confirm the agent's behavior does not change. Write down what would have to be true for it to change.
+4. Write the stack justification sentence for a new project of your own, and the sentence for the stack you would have chosen before this course.
 
 ## Checkpoint
 
-- For each of Projects 3 through 6 you have built, name which of the twelve framework additions you actually used.
+- For each of Projects 4, 5, 7, and 9 you have built, name which of the twelve framework additions you actually used.
 - Explain the harness/deployment split to a colleague using Managed Agents and the Agent SDK as the two examples.
 - Apply the topology-vs-model-plus-tools heuristic to the library-concierge and product-teardown examples.
-- Write the one sentence justifying your stack for Project 7.
+- Write the one sentence justifying your stack for Project 8.
 
 ## Sources
 

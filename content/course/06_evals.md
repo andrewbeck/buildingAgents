@@ -1,6 +1,21 @@
 # 06 — Evals
 
-> The eval discipline for agents: how to find what is actually breaking, turn it into a test set and a grader you trust, and measure so a prompt or model change is a decision instead of a gamble. After it you can run an error-analysis pass on 30 traces, build a 50-case eval set with a calibrated LLM judge, and say whether a change made your Project 6 agent better, worse, or just different.
+> The eval discipline for agents: how to find what is actually breaking, turn it into a test set and a grader you trust, and measure so a prompt or model change is a decision instead of a gamble. After it you can run an error-analysis pass on 30 traces, build a 50-case eval set with a calibrated LLM judge, and say whether a change made your Project 9 agent better, worse, or just different.
+
+## Build
+
+- [Project 6](./11_projects.md#project-6--eval-suite-and-review-workbench), part A: the eval suite for Project 5. Twenty hand-written cases, generated inputs for the rest, three layers of graders, and a judge aligned to your labels. Build it now, before Project 7; the course puts evals in the middle on purpose.
+- Part B, the review workbench, can wait until you have enough traces to need it, which is usually Project 9.
+
+## Read
+
+Read first:
+
+- **Your AI Product Needs Evals** (Hamel Husain, 2024). Three levels and the Rechat case study. Before any tooling.
+- **LLM Evals FAQ** (Husain and Shankar, 2025). How many examples, binary versus Likert, who arbitrates.
+- **Demystifying evals for AI agents** (Anthropic, 2026). Agent evals are trajectory evals.
+
+Read after: **LLM-as-a-Judge** and **Field Guide to Rapidly Improving AI Products** (Husain) before adding a judge; Eugene Yan's three pieces when your judge disagrees with you. All in the [evals tier](./13_reading_list.md#tier-evals).
 
 ## Why evals are the whole job
 
@@ -246,7 +261,7 @@ Most textual evals are single-turn. Agents are not. A multi-turn eval runs a ful
 
 ### What Anthropic learned on the research agent
 
-Anthropic's multi-agent research system, the one Project 6 is modeled on, shipped with a single LLM judge that scored five axes in one call and output both a 0.0 to 1.0 score and a pass/fail:
+Anthropic's multi-agent research system, the one Project 9 is modeled on, shipped with a single LLM judge that scored five axes in one call and output both a 0.0 to 1.0 score and a pass/fail:
 
 | Axis | Question |
 |---|---|
@@ -262,7 +277,7 @@ Anthropic's tool-evaluation cookbook flips the frame: have the agent grade your 
 
 ### Cost per win
 
-For scoring a multi-agent system against the single agent (Project 6's stretch goal), the critical column in the results table is **cost per win**. Multi-agent should win on breadth-first questions and lose on single-answer factual questions, at a token cost in the neighborhood of the roughly 4× the author measured in [Chapter 09](./09_multi_agent.md). If the wins do not justify the cost, the system is over-engineered for the question.
+For scoring a multi-agent system against the single agent (Project 9's stretch goal), the critical column in the results table is **cost per win**. Multi-agent should win on breadth-first questions and lose on single-answer factual questions, at a token cost in the neighborhood of the roughly 4× the author measured in [Chapter 09](./09_multi_agent.md). If the wins do not justify the cost, the system is over-engineered for the question.
 
 A workable dataset shape: 10 questions, 3 breadth-first, 3 comparison, 2 single-answer factual (where multi-agent should *not* help), 2 deep single-source, each with a hand-written rubric. Blind the judge with A/B labels. Hand-grade 3 of the 10 pairs first and iterate the judge prompt until you disagree on at most one. Score each criterion pass/fail with a one-line rationale rather than 1 to 5; rubric bullets are binary questions in disguise.
 
@@ -284,7 +299,7 @@ For a trace to become an eval case later it needs, per the [Production](./08_pro
 
 ### A/B testing
 
-The Level 3 eval. Leaders at big consumer and developer AI companies half-joke that they rely more on A/B testing of user metrics than on evals. That works when traffic is high enough that a quality drop shows up fast. Most of your agents do not have that traffic. Reserve A/B for changes already validated at Levels 1 and 2. Project 6's rainbow-deployment stretch is the small-scale version: a variant flag, 50/50 routing by question hash, the variant on every trace, an append-only run log. The router is 30 lines, the value is the logging discipline, and it is only worth it if you are actually varying something.
+The Level 3 eval. Leaders at big consumer and developer AI companies half-joke that they rely more on A/B testing of user metrics than on evals. That works when traffic is high enough that a quality drop shows up fast. Most of your agents do not have that traffic. Reserve A/B for changes already validated at Levels 1 and 2. Project 9's rainbow-deployment stretch is the small-scale version: a variant flag, 50/50 routing by question hash, the variant on every trace, an append-only run log. The router is 30 lines, the value is the logging discipline, and it is only worth it if you are actually varying something.
 
 ### Human review cadence
 
@@ -376,12 +391,19 @@ For the trajectory rubric, score each run 0 to 10 across the six dimensions and 
 
 Promote only if the total improves *and* safety does not drop. Then convert every production incident into a regression case and run the loop again.
 
+## Exercises
+
+1. Open code thirty raw Project 5 traces before reading past "Start with error analysis." Cluster the codes and name the largest cluster with a percentage.
+2. Write ten golden cases in the YAML shape from this chapter. Generate inputs, never outputs, for ten more.
+3. Grade twenty traces yourself, then have the judge grade them. Report agreement, true-positive rate, and true-negative rate separately.
+4. Make one deliberate prompt change to Project 5 and show the before-and-after diff from the regression runner.
+
 ## Checkpoint
 
-- You can open code 30 raw traces from your Project 6, cluster the codes, and name the largest failure cluster with a percentage.
+- You can open code 30 raw traces from your Project 9, cluster the codes, and name the largest failure cluster with a percentage.
 - You can write a 50-case eval set in the 20/10/10/5/5 shape as YAML golden cases with `must_call_tools`, `max_steps`, `expert_verdict`, and `critique`.
 - You can align a binary LLM judge to your own labels on a held-out set, report TPR and TNR separately, and say why raw agreement is not enough.
-- You can produce a blinded cost-per-win table for Project 5 versus Project 6 across breadth-first, comparison, single-fact, and deep questions.
+- You can produce a blinded cost-per-win table for Project 7 versus Project 9 across breadth-first, comparison, single-fact, and deep questions.
 - You can point at the seven dashboard metrics for your agent and say which one you are not currently logging.
 
 ## Sources

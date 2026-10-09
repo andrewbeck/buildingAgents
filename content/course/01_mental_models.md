@@ -2,6 +2,20 @@
 
 > What an agent is, where the idea came from, and the handful of frames you will use on every design decision in the rest of this course. After this chapter you should be able to look at any "agent" product or codebase and say, in one sentence each, what its loop is, what its memory layers are, how autonomous it is, and whether it is really a workflow.
 
+## Build
+
+- [Project 0](./11_projects.md#project-0--the-rings): Anthropic's tool-use tutorial as five scripts. Two hours. You do not need the frames in this chapter to run it, and running it first makes the frames concrete. [Chapter 03](./03_the_loop.md) is the commentary; start it now and finish it there.
+
+## Read
+
+Read first:
+
+- **Building Effective Agents** (Anthropic, 2024). The vocabulary every other source uses, and the workflow/agent distinction in Frame 1.
+- **Agents** (Simon Willison, 2025). The one-sentence definition this chapter builds on.
+- **LLM Powered Autonomous Agents** (Lilian Weng, 2023). Once, for where the ideas came from.
+
+Read after: CoALA and *Levels of Autonomy for AI Agents* for Frames 2 and 4, and the rest of the [mental models and history tier](./13_reading_list.md#tier-mental-models-and-history). Full citations are in Sources at the end of the chapter.
+
 ## Three definitions, in order of usefulness
 
 **Russell and Norvig (1995).** An agent is anything that perceives its environment through sensors and acts on it through actuators. A thermostat qualifies. Their ladder of sophistication (simple reflex → model-based reflex → goal-based → utility-based → learning) is still useful for one reason: most production "AI agents" are model-based reflex agents, a model with tools and a system prompt, and it is healthier to say so than to pretend otherwise.
@@ -69,7 +83,7 @@ Sumers et al., *Cognitive Architectures for Language Agents* (arXiv 2309.02427).
 | Semantic | General facts abstracted from experience | Knowledge bases, a `memory.md`, RAG corpora, the model's weights |
 | Procedural | How to do things | Skills, tool definitions, `agents.md`, code the agent runs |
 
-Most "muddled" agent designs are muddling these. If your entire memory story is one vector store, you have collapsed three distinct things into one. [Chapter 07](./07_context_and_memory.md) maps each of these to concrete files in Project 5.
+Most "muddled" agent designs are muddling these. If your entire memory story is one vector store, you have collapsed three distinct things into one. [Chapter 07](./07_context_and_memory.md) maps each of these to concrete files in Project 7.
 
 **Action space.** Internal actions change the agent's own state (think, plan, retrieve). External actions change the world (call an API, write a file, send an email). External actions have consequences and need permissions, logging, and rollback. Conflating the two is how you ship an agent that sends ten thousand emails.
 
@@ -134,7 +148,7 @@ Keep this split in mind when reading [Chapter 10](./10_platforms.md). "Framework
 
 **Planning vs. reactive.** A planner decides a sequence in advance; a reactive agent decides each step from current state. ReAct is reactive with reasoning. Modern agents are mostly reactive with light planning up front. Pure planning is brittle because the world changes; pure reactivity is myopic. Hybrid wins.
 
-**Single vs. multi-agent.** Multi-agent buys parallelism, specialization, and context isolation. It costs coordination overhead, tokens, and debuggability. Anthropic's research system reported roughly fifteen times the tokens of a chat; the author's Project 6 build measured about four times on a breadth-first research task, for reasons covered in [Chapter 09](./09_multi_agent.md). Default to single-agent.
+**Single vs. multi-agent.** Multi-agent buys parallelism, specialization, and context isolation. It costs coordination overhead, tokens, and debuggability. Anthropic's research system reported roughly fifteen times the tokens of a chat; the author's Project 9 build measured about four times on a breadth-first research task, for reasons covered in [Chapter 09](./09_multi_agent.md). Default to single-agent.
 
 **Skills.** A folder with a `SKILL.md` (frontmatter plus instructions) and optional scripts and references, loaded only when the task matches the description. Progressive disclosure for capabilities. Now an open spec at agentskills.io.
 
@@ -146,12 +160,18 @@ Keep this split in mind when reading [Chapter 10](./10_platforms.md). "Framework
 2. **The control loop is the agent.** Frameworks abstract it, SDKs hide it, managed runtimes run it for you. Build it from scratch once ([Chapter 03](./03_the_loop.md)) and you will see it everywhere.
 3. **Memory and tools are design decisions, not plumbing.** Most agent pathologies trace back to muddled memory layers or sloppy tool surfaces.
 
+## Exercises
+
+1. Pick three agent products you use and write one sentence each: the loop, the memory layers, the autonomy level, and whether it is really a workflow.
+2. Take Project 0's ring 2 script and label each line with the frame it belongs to: loop, tool, memory, or harness.
+3. Place Claude Code, a nightly data pipeline with one LLM call, and a customer-support bot on the autonomy levels, and say what would move each up one level.
+
 ## Checkpoint
 
-- You can state the workflow/agent distinction in one sentence and give an example of each from the project ladder (Project 3 vs. Project 4).
+- You can state the workflow/agent distinction in one sentence and give an example of each from the project ladder (Project 4 vs. Project 5).
 - You can place a product (Claude Code, a scheduled report bot, Copilot autocomplete) on the five autonomy levels and say what harness change would move it up or down.
-- You can map the Project 5 files (`memory.md`, `agents.md`, `skills/`, `reports/`) onto the four CoALA memory types.
-- You can explain why "the harness" and "the deployment" are separate questions, and which of the four approaches Project 4 uses.
+- You can map the Project 7 files (`memory.md`, `agents.md`, `skills/`, `reports/`) onto the four CoALA memory types.
+- You can explain why "the harness" and "the deployment" are separate questions, and which of the four approaches Project 5 uses.
 - You can say why the ReAct paper mattered without looking it up.
 
 ## Sources

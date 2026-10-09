@@ -8,6 +8,20 @@ The single most common mistake in this field is building an agent for a problem 
 - OpenAI: start with a capable model, well-defined tools, and clear instructions, and move to multi-agent only when needed.
 - One of the drafts this course was consolidated from put it best: **use the least autonomous architecture that reliably completes the job.**
 
+## Build
+
+No project on the ladder belongs to this chapter. The exercise below is the build: run the decision procedure on ideas of your own before Project 3 commits you to a shape. If you want code, run the Building Effective Agents cookbook patterns listed under Read; they are the rungs of the ladder in about 100 lines each.
+
+## Read
+
+Read first:
+
+- **Building Effective Agents** and its reference code (Anthropic). Each pattern is about 100 lines. Run them before reading any framework's docs.
+- **Learning the Bitter Lesson** (Lance Martin, 2025). Why hand-built structure becomes a bottleneck, which is the argument for starting low on the ladder.
+- **A Practical Guide to Building Agents** (OpenAI, 2025). The three "when to build" criteria this chapter reconciles with Anthropic's four.
+
+Read after: **Agent design patterns** (Lance Martin, 2026) and **How to think about agent frameworks** (Harrison Chase), both in the [when to build tier](./13_reading_list.md#tier-when-to-build).
+
 ## The complexity ladder
 
 Climb one rung at a time. Stop at the lowest rung that solves the problem.
@@ -211,6 +225,12 @@ If you find yourself in any of these, climb back down the ladder.
 > Pick the autonomy level from the consequence of a wrong action, not from what the model can do.
 >
 > Multi-agent only for a structural reason: parallelism, isolation, role-specific permissions. Never because more agents sounds better.
+
+## Exercises
+
+1. Write down three ideas from your own backlog. Run each through the ladder, the tree, and the rubric, and record the rung, the autonomy level, and the one-sentence justification. Keep the page; you will score the ideas again after Project 5.
+2. For each idea, name the tripwire that would move it one rung up, and the warning sign that would tell you it is on the wrong rung.
+3. Take the tool list you imagine for the highest-rung idea and cut it to what a single test case demands.
 
 ## Checkpoint
 
