@@ -70,13 +70,13 @@ npm start
 # → http://127.0.0.1:3001
 ```
 
-**What it shows.** Top-level folders in `./content/` are treated as courses. Viewable extensions: `.md`, `.txt`, `.yaml`, `.yml`, `.py`, `.mmd`, `.json`, `.toml`, `.sh`, plus extensionless plain text. Markdown renders with GFM tables, syntax-highlighted code, KaTeX math, and Mermaid diagrams. Drop in a new file or folder and it appears on the next sidebar refresh.
+**What it shows.** Top-level folders in `./content/` are treated as courses. Viewable extensions: `.md`, `.txt`, `.yaml`, `.yml`, `.py`, `.mmd`, `.json`, `.toml`, `.sh`, `.ts`, `.js`, plus extensionless plain text. Markdown renders with GFM tables, syntax-highlighted code, KaTeX math, and Mermaid diagrams. Drop in a new file or folder and it appears on the next sidebar refresh.
 
 **Features.** Dark and light theme. Zoom (`⌘=` / `⌘−` / `⌘0`, or `Ctrl` on non-Mac). Fuzzy search across every document (`⌘K` / `Ctrl+K`), scoped to a folder if you like. Per-document "mark as read" with sidebar dots. Per-document markdown notes and per-heading anchor notes, saved to `.data/notes.json` inside this repo (gitignored). Scroll position persists per document.
 
 **Configuration.** `CONTENT_ROOT` points the viewer at any content directory (default `./content/`). `PORT` sets the server port (default `3001`).
 
-**Security posture.** A single-user local tool, but hardened: the server binds to `127.0.0.1` only; the file API uses an extension allowlist, path resolution, and a realpath check against `..` and symlink escapes; it is read-only against the content root, with the only writes going to `.data/`; note and progress payloads are schema-validated and size-capped; Helmet headers; no remote scripts (Mermaid, highlight.js, and KaTeX are bundled). No API keys are needed.
+**Security posture.** A single-user local tool, but hardened: the server binds to `127.0.0.1` only; the file API uses an extension allowlist, path resolution, and a realpath check against `..` and symlink escapes; writes are limited to editing an existing allowlisted file inside the content root (the viewer's in-place editor) and to `.data/`; every request must carry a loopback `Host` and, if present, a loopback `Origin`, which blocks DNS-rebinding pages from reaching the API; note and progress payloads are schema-validated and size-capped; Helmet headers; no remote scripts (Mermaid, highlight.js, and KaTeX are bundled). No API keys are needed.
 
 **Extending.** New course: `mkdir content/<name>` and drop files in. New file extension: add it to `ALLOWED_EXTENSIONS` in `server/tree.ts` and the language map in `src/lib/codeLang.ts`.
 

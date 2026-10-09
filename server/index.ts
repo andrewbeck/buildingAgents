@@ -19,6 +19,7 @@ function expandHome(p: string): string {
 
 const PORT = Number(process.env.PORT ?? 3001);
 const HOST = "127.0.0.1";
+const LOOPBACK_HOSTS = new Set(["127.0.0.1", "localhost", "::1"]);
 const CONTENT_ROOT = path.resolve(
   expandHome(process.env.CONTENT_ROOT ?? path.join(repoRoot, "content")),
 );
@@ -48,6 +49,29 @@ async function main() {
 
   app.disable("x-powered-by");
   app.set("trust proxy", false);
+
+  // Reject requests whose Host or Origin is not loopback. The server only
+  // binds to 127.0.0.1, but a DNS-rebinding page could still reach it with a
+  // foreign Host header; this closes that hole for both reads and writes.
+  app.use((req, res, next) => {
+    const host = (req.headers.host ?? "").replace(/:\d+$/, "").replace(/^\[|\]$/g, "");
+    if (!LOOPBACK_HOSTS.has(host)) {
+      return res.status(403).json({ error: "forbidden host" });
+    }
+    const origin = req.headers.origin;
+    if (origin) {
+      let originHost = "";
+      try {
+        originHost = new URL(origin).hostname.replace(/^\[|\]$/g, "");
+      } catch {
+        originHost = "";
+      }
+      if (!LOOPBACK_HOSTS.has(originHost)) {
+        return res.status(403).json({ error: "forbidden origin" });
+      }
+    }
+    next();
+  });
 
   app.use(
     helmet({
