@@ -49,17 +49,6 @@ Start at [`content/course/00_start_here.md`](content/course/00_start_here.md). T
 
 The projects in Chapter 11 are specs, not solutions. You build them.
 
-## How this was assembled
-
-This course was assembled, not written from scratch:
-
-1. Five independent curriculum drafts were generated with LLM research assistants (two with ChatGPT, three with Claude) from the same brief: a first-principles course on building agents for an experienced engineer, primary sources only.
-2. The author worked through the material, built the ten projects in Chapter 11, and kept reading notes.
-3. In September 2026 the drafts, the project write-ups, and the notes were consolidated into one course with an LLM and then edited by hand. Duplicates were cut, disagreements between drafts were resolved and noted where they mattered, and every source was re-filtered.
-4. Every URL was fetched and checked as live on 2026-09-09. Perishable facts (model IDs, prices, beta headers, versions) were re-verified against primary sources on that date and are marked with a `Snapshot 2026-09` callout.
-
-**Source policy.** Only primary docs, papers, vendor engineering blogs, free courses, and practitioners who publish evidence. Paid-course promotion, listicles, vendor comparisons written by competitors, aggregators, social-media threads, and "follow these accounts" lists were cut. Chapter 13 states the rule and the categories that were removed so you can apply the same filter to new material.
-
 ## Keeping it current, and making it yours
 
 The field moves monthly and this course is a snapshot. Two things to do before relying on it:
