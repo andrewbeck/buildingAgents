@@ -1,5 +1,17 @@
 # Building Agents
 
+## Intro from the human!
+
+In early 2026 I felt I needed to get much better at building agents. Really I needed to understand them more deeply, and I ended up making this self-directed course for myself and now for anybody else who may find it useful. I spent time researching on my own, and iterated back and forth with claude code and codex to build out a more robust course which included practice problems. Added some visual tools along the way. I ended up spending like 2-3 weeks going through the content. Everything here is free and generally available; the benefit to this repo is that it's brought together into a "course" you can work through, helps to frame things and gives some direction if you're a beginner. The practice problems are helpful also.
+
+What I think you should do is basically what I did: point an agent at this, have it get you going on the course, and also use it to personalize the course to you. The first thing to do is make sure the content is up to date - I have not updated this since September 2026, and much of it was initially put together earlier in the year around April 2026. Next, personalize it to your interests - if there's some topic you especially want, tell the agent that, and it can re-work the content to emphasize that more or move it up in prioritization or whatever. The visualization of the content was all just personal preference, you can change all that also. In fact, it all comes down to .md files so you can do whatever you want with it.
+
+Ultimately I wanted to understand LLMs more completely, and be able to build agentic products and services, build with agents, and build for agents. This exercise was very helpful in getting me started, and from there it's all about spending time building.
+
+The rest of this was written using AI models, only lightly edited.
+
+## The rest of this is by AI (lightly edited)
+
 A self-directed course on how AI agents work and how to build agentic products and services, plus a small local viewer for reading it.
 
 The course has two aims. The first is to learn how agents work and how to build agentic products and services: the loop, tools, patterns, evals, context and memory, production, multi-agent, platforms. The second is to get better at the three skills that come with the territory: building *with* agents (using coding agents well), building agents, and building *for* agents (tools, skills, MCP servers, and harnesses that other agents consume).
