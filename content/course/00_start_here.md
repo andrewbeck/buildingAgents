@@ -1,6 +1,6 @@
 # Building AI Agents — The Course
 
-> A self-directed course on how agents work and how to build agentic products and services. First-principles before frameworks, primary sources over summaries, ship things that are not toys. Content last revised September 2026; see [How this was made](#how-this-was-made-and-how-to-keep-it-current) before trusting anything perishable.
+> A self-directed course on how agents work and how to build agentic products and services. First-principles before frameworks, primary sources over summaries, ship things that are not toys. Content last revised September 2026; see [How to keep it current](#how-to-keep-it-current) before trusting anything perishable.
 
 ## Who this is for
 
@@ -52,18 +52,11 @@ Each chapter opens with a **Build** section naming the projects to do alongside 
 - "Author's note" callouts are lightly edited observations from the author's own builds of the projects in Chapter 12. They are one practitioner's experience, not a source.
 - Each chapter's sources are primary (vendor docs, papers, engineering blogs, practitioners who publish evidence) and were checked as live on 2026-09-09 where tooling allowed.
 
-## How this was made, and how to keep it current
+## How to keep it current
 
-This course was assembled, not written from scratch. The process:
+Every URL was checked as live and every perishable fact re-verified against primary sources on 2026-09-09. The author does not update this on a schedule. Two consequences:
 
-1. Five independent curriculum drafts were generated with LLM research assistants (two with ChatGPT, three with Claude) from the same brief: a first-principles course on building agents for an experienced engineer, primary sources only.
-2. The author worked through the material, built the projects in Chapter 12, and kept reading notes.
-3. In September 2026 the five drafts, the project write-ups, and the notes were consolidated into this single course with an LLM, then edited by hand. Duplicate material was cut, disagreements between drafts were resolved and noted where they mattered, and every source was re-filtered against the rule in Chapter 14: primary docs, papers, vendor engineering blogs, and practitioners who publish evidence. Paid-course promotion, listicles, vendor comparisons written by competitors, aggregators, and "follow these accounts" lists were cut.
-4. Every URL was fetched and checked as live on 2026-09-09, and perishable facts were re-verified against primary sources on that date.
-
-The author does not update this on a schedule. Two consequences:
-
-- **Bring it up to date before you rely on it.** The field moves monthly. Start with [Chapter 13](./13_whats_new_2026.md), which is a worked example of a delta pass, and re-run that exercise for the months since September 2026. Then re-verify each snapshot callout. The sources lists at the bottom of each chapter tell you where to look.
+- **Bring it up to date before you rely on it.** The field moves monthly. Start with [Chapter 13](./13_whats_new_2026.md), which is a worked example of a delta pass, and re-run that exercise for the months since September 2026. Then re-verify each snapshot callout. The sources lists at the bottom of each chapter tell you where to look, and the filter rule in Chapter 14 says what to admit: primary docs, papers, vendor engineering blogs, and practitioners who publish evidence.
 - **Personalize it.** The project ladder, the stack choices, and the reading order reflect one engineer's situation: TypeScript and Python, the Claude API and LangGraph as the primary stack. If your stack is different, the mental models hold and the specifics should be swapped. The fastest way to do that is to hand this folder to a coding agent with your own constraints and have it propose the edits; that is also a good first exercise in building *with* agents.
 
 ## What "mastery" looks like
