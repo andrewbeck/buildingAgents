@@ -4,7 +4,7 @@
 
 ## Who this is for
 
-An engineer who wants one coherent path from "what is an agent" to "I have shipped and operated one." It assumes you can write Python or TypeScript and have called an LLM API at least once. It is not a beginner programming course, but it is complete enough to be a first agents course, and it is dense enough to serve as a reference afterward.
+A builder who wants one coherent path from "what is an agent" to "I have shipped and operated one." Its best if you have some coding knowledge beforehand, and ideally spent some time building products either by yourself or with a team. The course is complete enough to serve as a first pass through building agents, and complete enough to be a reference for further investigation afterward.
 
 The course has two aims. The first is to learn how agents work and how to build agentic products and services. The second is to get better at the three related skills that come with the territory: building *with* agents (using coding agents well), building agents, and building *for* agents (tools, skills, MCP servers, and harnesses that other agents consume).
 
